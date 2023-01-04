@@ -20,3 +20,10 @@ stage('Synk-GateSonar-Security') {
    }
 }
 
+stage('Docker Build') {
+            steps {
+                script {
+                    docker.build("node-app:${TAG}")
+                }
+            }
+        }
