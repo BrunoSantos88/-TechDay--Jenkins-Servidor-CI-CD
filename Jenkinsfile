@@ -9,7 +9,6 @@ pipeline {
 		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos88-1 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=700dcb9a79ba7aa525cdf858e19ccf6ad1e59b98'
 			}
         } 
-   }
 
 stage('Synk-GateSonar-Security') {
             steps {		
@@ -17,8 +16,7 @@ stage('Synk-GateSonar-Security') {
 					sh 'mvn snyk:test -fn'
 				}
 			}
+  }
+   }
 }
-
-}
-
 
