@@ -1,33 +1,37 @@
 pipeline {
-    agent any
-    options {
-        skipStagesAfterUnstable()
+  agent any
+  tools { 
+        maven 'Maven 3.5.2'  
     }
-    stages {
-         stage('Clone repository') { 
-            steps { 
-                script{
-                checkout scm
-                }
-            }
-        }
+   stages{
+    stage('SonarCloud-GateCode-Quality') {
+            steps {	
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos88-1 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=700dcb9a79ba7aa525cdf858e19ccf6ad1e59b98'
+			}
+        } 
 
+stage('Synk-GateSonar-Security') {
+            steps {		
+				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
+					sh 'mvn snyk:test -fn'
+				}
+			}
+  }
 
-	stage('Build') { 
+stage('Build') { 
             steps { 
                withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
                  script{
-                 app =  docker.build("infrati")
+                 app =  docker.build("asg")
                  }
                }
             }
     }
 
-
 	stage('Push') {
             steps {
                 script{
-                    docker.withRegistry('132333066544.dkr.ecr.us-east-1.amazonaws.com','ecr:us-east-1:aws-credentials') {
+                    docker.withRegistry('555527584255.dkr.ecr.us-east-1.amazonaws.com', 'ecr:east-1:aws-credentials') {
                     app.push("latest")
                     }
                 }
