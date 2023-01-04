@@ -9,6 +9,7 @@ pipeline {
 		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos88-1 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=700dcb9a79ba7aa525cdf858e19ccf6ad1e59b98'
 			}
         } 
+   }
 
 stage('Synk-GateSonar-Security') {
             steps {		
@@ -18,18 +19,19 @@ stage('Synk-GateSonar-Security') {
 			}
   }
 
-stage('Build image') {
-
-
-        app = docker.build("app")
-    }
+stages {
+        stage ('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                script {
+                    docker.build("node-app:${TAG}")
+                }
+            }
+        }
+	
    }
 }
-
-stage('Push image') {
-        /* Push image using withRegistry. */
-        docker.withRegistry('brunosantos88', 'dockerlogin') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-        }
-    }
