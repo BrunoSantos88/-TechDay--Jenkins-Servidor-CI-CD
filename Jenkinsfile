@@ -18,6 +18,7 @@ stage('Synk-GateSonar-Security') {
 			}
   }
 
+<<<<<<< HEAD
 stage('Build image') {
         /* Build your image */
 
@@ -34,4 +35,5 @@ stage('Push image') {
             app.push("latest")
         }
     }
+
 }
