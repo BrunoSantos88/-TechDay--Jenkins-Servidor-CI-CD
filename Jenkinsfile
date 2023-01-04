@@ -3,8 +3,6 @@ pipeline {
   tools { 
         maven 'Maven 3.5.2'  
     }
-
-    
    stages{
     stage('SonarCloud-GateCode-Quality') {
             steps {	
@@ -21,4 +19,26 @@ stage('Synk-GateSonar-Security') {
     
   }
   }
+  
+
+  stage('Docker-Hub-Integration') { 
+            steps { 
+               withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
+                 script{
+                 app =  docker.build("infrati")
+                 }
+               }
+            }
     }
+
+stage('Push') {
+            steps {
+                script{
+                    docker.withRegistry('132333066544.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws-credentials') {
+                    app.push("latest")
+                    }
+                }
+            }
+    	}
+	    
+  }
