@@ -29,7 +29,7 @@ stage('Synk-GateSonar-Security') {
                  }
                }
             }
-    }
+    
 
 stage('Push') {
             steps {
