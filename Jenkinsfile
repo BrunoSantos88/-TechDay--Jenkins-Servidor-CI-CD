@@ -6,9 +6,10 @@ pipeline {
    stages{
     stage('CompileandRunSonarAnalysis') {
             steps {	
-		sh 'mvn verify sonar:sonar -Dsonar.host.url=https://sonarcloud.io','-Dsonar.organization=BrunoSantos','-Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD','-Dsonar.login=3a6ebbcf20e61f57cb4d6ccc3d9398d3b99df3bd'
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD --Dsonar.organization=BrunoSantos -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=3a6ebbcf20e61f57cb4d6ccc3d9398d3b99df3bd'
 			}
         } 
+
   
   }
 }
