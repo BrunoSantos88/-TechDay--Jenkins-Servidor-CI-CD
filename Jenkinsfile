@@ -17,15 +17,6 @@ script {
 sh "aws ecr get-login-password — region ${AWS_DEFAULT_REGION} | docker login — username AWS — password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
 
 }
-
-}
-}
-
-
-
-stage('Cloning Gi') {
-steps {
-checkout([$class: 'GitSCM', branches: [[name:'*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/BrunoSantos88/-TechDay--Jenkins-Servidor-CI-CD.git']]])
 }
 }
 
