@@ -12,25 +12,23 @@ pipeline {
             }
         }
     }
-
+    
 stages {
         stage('Build') {
             steps {
-                bat  'docker build -t sampleapp -f SampleApp/Dockerfile .'
+                bat  'docker build -t sampleapp .'
             }
         }
-        stage('Push image') {
-         steps {
-           withDockerRegistry([url: "132333066544.dkr.ecr.us-east-1.amazonaws.com/infrati",credentialsId: "ecr:us-east-1:aws-credentials"]) {
-           bat 'docker push sampleapp:latest'
-               }
-        }
-        stage('Deploy') {
+        
+stage('Push') {
             steps {
-                echo 'Deploying....'
+                script{
+                    docker.withRegistry('132333066544.dkr.ecr.us-east-1.amazonaws.com/infrati', 'ecr:east-1:aws-credentials') {
+                    app.push("latest")
+                    }
+                }
             }
-        }
-    }
-}
-
+    	}
+	    
+  }
 }
