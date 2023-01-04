@@ -21,11 +21,20 @@ stage('Synk-GateSonar-Security') {
 stage('Building image') {
       steps{
         script {
-          dockerImage = docker.build app .
+          dockerImage = docker.build imagename
         }
       }
     }
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push("$BUILD_NUMBER")
+             dockerImage.push('latest')
 
+          }
+        }
+      }
     }
-
+   }
 }
