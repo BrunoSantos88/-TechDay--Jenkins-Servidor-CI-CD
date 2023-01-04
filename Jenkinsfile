@@ -24,6 +24,7 @@ stage('Build image') {
         app = docker.build("app")
     }
    }
+}
 
 stage('Push image') {
         /* Push image using withRegistry. */
@@ -32,5 +33,3 @@ stage('Push image') {
             app.push("latest")
         }
     }
-
-}
