@@ -18,14 +18,11 @@ stage('Synk-GateSonar-Security') {
 			}
   }
 
-<<<<<<< HEAD
 stage('Build image') {
-        /* Build your image */
+
 
         app = docker.build("app")
-
     }
-
    }
 
 stage('Push image') {
