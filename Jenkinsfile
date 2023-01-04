@@ -16,12 +16,9 @@ stage('Synk-GateSonar-Security') {
 					sh 'mvn snyk:test -fn'
 				}
 			}
-    
   }
-  }
-  
 
-  stage('Docker-Hub-Integration') { 
+stage('Build') { 
             steps { 
                withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
                  script{
@@ -29,9 +26,9 @@ stage('Synk-GateSonar-Security') {
                  }
                }
             }
-    
+    }
 
-stage('Push') {
+	stage('Push') {
             steps {
                 script{
                     docker.withRegistry('132333066544.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws-credentials') {
