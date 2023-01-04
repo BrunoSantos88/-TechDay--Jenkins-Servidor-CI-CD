@@ -17,14 +17,8 @@ stage('Synk-GateSonar-Security') {
 					sh 'mvn snyk:test -fn'
 				}
 			}
-  }
+}
 
-stages {
-        stage ('Build') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
         stage('Docker Build') {
             steps {
                 script {
@@ -34,4 +28,4 @@ stages {
         }
 	
    }
-}
+
