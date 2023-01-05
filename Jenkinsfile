@@ -4,7 +4,13 @@ registry = "brunosantos88/developerpythonapp"
 registryCredential = 'dockerlogin'
 dockerImage = ''
 }
-
+agent any
+stages {
+stage('Cloning our Git') {
+steps {
+git 'https://github.com/BrunoSantos88/-TechDay--Jenkins-Servidor-CI-CD.git'
+}
+}
 stage('Building our image') {
 steps{
 script {
@@ -18,6 +24,12 @@ script {
 docker.withRegistry( '', registryCredential ) {
 dockerImage.push()
 }
+}
+}
+}
+stage('Cleaning up') {
+steps{
+sh "docker rmi $registry:$BUILD_NUMBER"
 }
 }
 }
