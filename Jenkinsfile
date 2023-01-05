@@ -19,13 +19,13 @@ checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleCon
 }
 
 
-stage('Building image') {
-steps{
-script {
-dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
-}
-}
-}
+stage('Build') { 
+            steps { 
+               script {
+               dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+                 }
+               }
+            }
 
 stage('Pushing to ECR') {
 steps{
@@ -36,4 +36,5 @@ sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${
 }
 }
 }
+
 
