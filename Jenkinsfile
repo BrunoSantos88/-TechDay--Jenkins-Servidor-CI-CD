@@ -27,3 +27,6 @@ stage('Synk-GateSonar-Security') {
                }
             }
     }
+
+   }
+}
