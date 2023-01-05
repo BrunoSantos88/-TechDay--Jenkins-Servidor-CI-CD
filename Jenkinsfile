@@ -1,16 +1,20 @@
 pipeline {
-  agent any
-  tools { 
-        maven 'Maven 3.5.2'  
-    }
+    agent none
 
-stage('Setting the variables values') {
-    steps {
-         sh '''
-            #!/bin/bash
-            echo "hello world"
-         '''
-    }
-}
+    stages {
 
+        stage ('Hello') {
+            agent any
+
+            steps {
+                echo 'Hello, '
+
+                sh '''#!/bin/bash
+
+                    echo "Hello from bash"
+                    echo "Who I'm $SHELL"
+                '''
+            }
+        }
+    }
 }
