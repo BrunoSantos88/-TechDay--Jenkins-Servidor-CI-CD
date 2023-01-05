@@ -1,12 +1,15 @@
-pipeline
-{ agent { docker { image 'mven:3.5.2'
-} }
-stages {
-stage('log version info') {
-steps {
-sh 'mvn --version'
-sh 'mvn clean install'
-}
-}
-}
+pipeline {
+    agent any
+    stages {
+        stage('Build image') {
+            steps {
+                echo 'Starting to build docker image'
+
+                script {
+                    def customImage = docker.build("my-image:${env.BUILD_ID}")
+                    customImage.push()
+                }
+            }
+        }
+    }
 }
