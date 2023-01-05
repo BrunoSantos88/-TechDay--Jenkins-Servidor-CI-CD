@@ -8,7 +8,7 @@ agent any
 stages {
 stage('Cloning our Git') {
 steps {
-git 'https://github.com/BrunoSantos88/-TechDay--Jenkins-Servidor-CI-CD.git'
+git clone 'https://github.com/BrunoSantos88/-TechDay--Jenkins-Servidor-CI-CD.git'
 }
 }
 stage('Building our image') {
