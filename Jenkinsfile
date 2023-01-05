@@ -1,34 +1,24 @@
-pipeline {
-  agent any
-  tools { 
-        maven 'Maven 3.5.2'  
+pipeline
+    agent {
+        label 'default'
     }
-   stages{
-    stage('SonarCloud-GateCode-Quality') {
-            steps {	
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos88-1 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=700dcb9a79ba7aa525cdf858e19ccf6ad1e59b98'
-			}
-        } 
+    tools {
+        terraform 'terraform-11'
+    }
 
-stage('Synk-GateSonar-Security') {
-            steps {		
-				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-					sh 'mvn snyk:test -fn'
-				}
-			}
-  }
-
-stage('Build') { 
-            steps { 
-               withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
-                 script{
-                 app =  docker.build("container")
-                    }
-               }
+        stage('Terraform init'){
+            steps{
+                sh 'terraform init'
             }
-    }
-	    
-  }
-}
-
-
+        }
+        stage('Terraform Apply'){
+            steps{
+                withCredentials([[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: "aws_credential",
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                sh 'terraform apply --auto-approve'
+                }
+            }
+        }
