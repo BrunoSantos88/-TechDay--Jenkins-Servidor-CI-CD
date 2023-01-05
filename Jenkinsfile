@@ -1,9 +1,6 @@
 pipeline {
     agent any
-    tools { 
-        maven 'Maven 3.5.2'  
-    }
-    
+  
     environment {
         AWS_ACCOUNT_ID="555527584255"
         AWS_DEFAULT_REGION="us-east-1"
