@@ -22,7 +22,7 @@ stage('Synk-GateSonar-Security') {
             steps { 
                withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
                  script{
-                 app =  docker.build("asg")
+                 app =  docker.build("frontend")
                  }
                }
             }
@@ -31,7 +31,7 @@ stage('Synk-GateSonar-Security') {
 	stage('Push') {
             steps {
                 script{
-                    docker.withRegistry('https://555527584255.dkr.ecr.us-west-2.amazonaws.com', 'ecr.us-west-2:aws-credentials') {
+                    docker.withRegistry('https://132333066544.dkr.ecr.us-west-2.amazonaws.com', 'ecr.us-west-2:aws-credentials') {
                     app.push("latest")
                     }
                 }
