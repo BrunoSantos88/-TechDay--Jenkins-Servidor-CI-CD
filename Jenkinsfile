@@ -3,6 +3,13 @@ pipeline {
   tools { 
         maven 'Maven 3.5.2'  
     }
+
+    environment {
+        DATE = new Date().format('yy.M')
+        TAG = "${DATE}.${BUILD_NUMBER}"
+    }
+
+
    stages{
     stage('SonarCloud-GateCode-Quality') {
             steps {	
@@ -18,15 +25,23 @@ stage('Synk-GateSonar-Security') {
 			}
   }
 
-	stage('Build') { 
-            steps { 
-               withDockerRegistry([credentialsId: "dockerlogin", url: "https://registry.hub.docker.com"]) {
-                 script{
-                 app =  docker.build("asg")
-                 }
-               }
+	stage('Docker Build') {
+            steps {
+                script {
+                    docker.build("frontend:${TAG}")
+                }
             }
-    }
+        }
 
+stage('Pushing Docker Image to Dockerhub') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerlogin') {
+                        docker.image("brunosantos88/developerpythonapp/frontend:${TAG}").push()
+                        docker.image("brunosantos88/developerpythonapp/frontend:${TAG}").push("latest")
+                    }
+                }
+            }
+        }
    }
 }
