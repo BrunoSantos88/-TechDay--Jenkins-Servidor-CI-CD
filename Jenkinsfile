@@ -16,7 +16,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    docker.build(":${TAG}")
+                    docker.build("brunosantos88/developerpythonapp:${TAG}")
                 }
             }
         }
