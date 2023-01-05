@@ -1,13 +1,23 @@
 pipeline {
   agent any
   tools { 
-        maven 'Maven 3.8.7'  
+        maven 'Maven 3.5.2'  
     }
-  
-    stage('Docker Build') {
-    	agent any
-      steps {
-      	sh 'docker build -t brunosantos88/developerpythonapp:latest .'
-      }
+   stages{
+    stage('SonarCloud-GateCode-Quality') {
+            steps {	
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos88-1 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=700dcb9a79ba7aa525cdf858e19ccf6ad1e59b98'
+			}
+        } 
+
+	stage('Build') { 
+            steps { 
+               withDockerRegistry([credentialsId: "dockerlogin", url: "https://hub.docker.com/"]) {
+                 script{
+                 app =  docker.build("brunosantos88/developerpythonapp")
+                 }
+               }
+            }
     }
+   }
 }
