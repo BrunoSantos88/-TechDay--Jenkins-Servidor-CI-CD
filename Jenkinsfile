@@ -3,6 +3,7 @@ pipeline {
   tools { 
         maven 'Maven 3.5.2'  
     }
+
    stages{
     stage('SonarCloud-GateCode-Quality') {
             steps {	
@@ -37,4 +38,5 @@ stage('Synk-GateSonar-Security') {
                 }
             }
     	}
-
+  }
+}
