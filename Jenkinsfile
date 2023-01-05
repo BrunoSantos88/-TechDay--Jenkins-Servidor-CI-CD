@@ -1,21 +1,12 @@
-pipeline {
-    agent none
-
-    stages {
-
-        stage ('docker build') {
-            agent any
-
-            steps {
-                echo 'Hello, '
-
-                sh '''
-
-                docker build -t .
-
-
-                '''
-            }
-        }
-    }
+pipeline
+{ agent { docker { image 'mven:3.5.2'
+} }
+stages {
+stage('log version info') {
+steps {
+sh 'mvn --version'
+sh 'mvn clean install'
+}
+}
+}
 }
