@@ -1,12 +1,28 @@
 pipeline {
-    agent any
-  
-    environment {
-        AWS_ACCOUNT_ID="555527584255"
-        AWS_DEFAULT_REGION="us-east-1"
-        IMAGE_REPO_NAME="siteweb"
-        IMAGE_TAG="latest"
-        REPOSITORY_URI = "555527584255.dkr.ecr.us-east-1.amazonaws.com/siteweb"
+  agent any
+  tools { 
+        maven 'Maven 3.5.2'  
     }
-}
+
+	stage('Build') { 
+            steps { 
+               withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
+                 script{
+                 app =  docker.build("siteweb")
+                 }
+               }
+            }
+    }
+
+	stage('Push') {
+            steps {
+                script{
+                    docker.withRegistry('https://145988340565.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:aws-credentials') {
+                    app.push("latest")
+                    }
+                }
+            }
+    	}
+	    
+  }
 
