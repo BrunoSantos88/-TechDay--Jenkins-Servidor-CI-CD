@@ -1,3 +1,9 @@
+pipeline {
+  agent any
+  tools { 
+        maven 'Maven 3.5.2'  
+    }
+
 stage('Setting the variables values') {
     steps {
          sh '''
@@ -5,4 +11,6 @@ stage('Setting the variables values') {
             echo "hello world"
          '''
     }
+}
+
 }
