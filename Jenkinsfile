@@ -9,6 +9,7 @@ IMAGE_TAG="latest"
 REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
 }
 
+}
 // Building Docker images
 stage('Building image') {
 steps{
@@ -27,4 +28,4 @@ sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${
 }
 }
 }
-}
+
