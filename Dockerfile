@@ -1,7 +1,8 @@
-FROM python:3.7.3
-LABEL MAINTAINER mlabouardy
-WORKDIR /ap.
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-COPY movies.json main.py ./
-CMD python main.py
+FROM nginx:latest
+
+WORKDIR /var/www/html
+COPY css.css /usr/share/nginx/html/
+COPY index.html /usr/share/nginx/html/
+COPY js.js /usr/share/nginx/html/
+
+EXPOSE 80
