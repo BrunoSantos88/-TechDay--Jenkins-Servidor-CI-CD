@@ -28,7 +28,7 @@ stage('Synk-GateSonar-Security') {
 	stage('Docker Build') {
             steps {
                 script {
-                    docker.build("frontend:${TAG}")
+                    docker.build("brunosantos88/developerpythonapp:${TAG}")
                 }
             }
         }
@@ -37,8 +37,8 @@ stage('Pushing Docker Image to Dockerhub') {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerlogin') {
-                        docker.image("brunosantos88/developerpythonapp/frontend:${TAG}").push()
-                        docker.image("brunosantos88/developerpythonapp/frontend:${TAG}").push("latest")
+                        docker.image("brunosantos88/developerpythonapp:${TAG}").push()
+                        docker.image("brunosantos88/developerpythonapp:${TAG}").push("latest")
                     }
                 }
             }
