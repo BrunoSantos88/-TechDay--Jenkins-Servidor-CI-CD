@@ -1,10 +1,15 @@
+#!groovy
+
 pipeline {
-    agent any
-    tools {
-        maven 'Maven 3.5.2' 
-    }
-  
-steps {
+	agent none
+  stages {
+  	stage('Maven Install') {
+    	agent {
+      	docker {
+        	image 'maven:3.5.2'
+        }
+      }
+      steps {
       	sh 'mvn clean install'
       }
     }
@@ -14,4 +19,6 @@ steps {
       	sh 'docker build -t brunosantos88/developerpythonapp:latest .'
       }
     }
+  }
+}
 
