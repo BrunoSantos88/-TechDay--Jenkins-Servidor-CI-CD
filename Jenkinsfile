@@ -1,23 +1,16 @@
+#!groovy
 pipeline {
-  agent any
-  tools { 
-        maven 'Maven 3.5.2'  
+	agent none
+  stages {
+  	stage('Maven Install') {
+    	agent {
+      	docker {
+        	image 'maven:3.5.2'
+        }
+      }
+      steps {
+      	sh 'mvn clean install'
+      }
     }
-   stages{
-    stage('SonarCloud-GateCode-Quality') {
-            steps {	
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos88-1 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=700dcb9a79ba7aa525cdf858e19ccf6ad1e59b98'
-			}
-        } 
-
-	stage('Build') { 
-            steps { 
-               withDockerRegistry([credentialsId: "dockerlogin", url: "https://hub.docker.com/"]) {
-                 script{
-                 app =  docker.build("brunosantos88/developerpythonapp")
-                 }
-               }
-            }
-    }
-   }
+  }
 }
