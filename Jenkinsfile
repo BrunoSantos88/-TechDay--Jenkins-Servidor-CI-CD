@@ -1,24 +1,29 @@
-pipeline
-    agent {
-        label 'default'
-    }
-    tools {
-        terraform 'terraform-11'
-    }
+pipeline {
+    agent any
 
-        stage('Terraform init'){
+    stages {
+        stage('Checkout') {
+            steps {
+            checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/BrunoSantos88/-TechDay--Jenkins-Servidor-CI-CD.git']]])            
+
+          }
+        }
+        stage('terraform format check') {
+            steps{
+                sh 'terraform fmt'
+            }
+        }
+        stage('terraform Init') {
             steps{
                 sh 'terraform init'
             }
         }
-        stage('Terraform Apply'){
+        stage('terraform apply') {
             steps{
-                withCredentials([[
-                    $class: 'AmazonWebServicesCredentialsBinding',
-                    credentialsId: "aws_credential",
-                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                 sh 'terraform apply --auto-approve'
-                }
             }
         }
+    }
+
+    
+}
