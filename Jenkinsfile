@@ -3,32 +3,15 @@ pipeline {
     tools {
         maven 'Maven 3.5.2' 
     }
-    environment {
-        DATE = new Date().format('yy.M')
-        TAG = "${DATE}.${BUILD_NUMBER}"
+  
+steps {
+      	sh 'mvn clean install'
+      }
     }
-    stages {
-        stage ('Build') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
-        stage('Docker Build') {
-            steps {
-                script {
-                    docker.build("brunosantos88/developerpythonapp:${TAG}")
-                }
-            }
-        }
-	    stage('Pushing Docker Image to Dockerhub') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerlogin') {
-                        docker.image("brunosantos88/developerpythonapp:${TAG}").push()
-                        docker.image("brunosantos88/developerpythonapp:${TAG}").push("latest")
-                    }
-                }
-            }
-        }
-}
-}
+    stage('Docker Build') {
+    	agent any
+      steps {
+      	sh 'docker build -t brunosantos88/developerpythonapp:latest .'
+      }
+    }
+
