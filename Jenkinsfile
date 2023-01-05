@@ -31,7 +31,7 @@ stage('Synk-GateSonar-Security') {
 	stage('Push') {
             steps {
                 script{
-                    docker.withRegistry('https://132333066544.dkr.ecr.us-west-2.amazonaws.com', 'ecr.us-west-2:aws-credentials') {
+                    docker.withRegistry('https://132333066544.dkr.ecr.us-west-2.amazonaws.com', 'aws-credentials') {
                     app.push("latest")
                     }
                 }
@@ -40,4 +40,3 @@ stage('Synk-GateSonar-Security') {
 	    
   }
 }
-  
