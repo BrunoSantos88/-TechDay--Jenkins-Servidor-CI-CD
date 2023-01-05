@@ -3,16 +3,17 @@ pipeline {
 
     stages {
 
-        stage ('Hello') {
+        stage ('docker build') {
             agent any
 
             steps {
                 echo 'Hello, '
 
-                sh '''#!/bin/bash
+                sh '''
 
-                    echo "Hello from bash"
-                    echo "Who I'm $SHELL"
+                docker build -t .
+
+
                 '''
             }
         }
