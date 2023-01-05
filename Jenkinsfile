@@ -4,11 +4,13 @@ pipeline {
         maven 'Maven 3.5.2' 
     }
 
-    stage('Docker Build') {
-            steps {
-                script {
-                    docker.build("hello-world:${TAG}")
-                }
+  stage('Build') { 
+            steps { 
+               withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
+                 script{
+                 app =  docker.build("pythonapp")
+                 }
+               }
             }
-        }
     }
+}
