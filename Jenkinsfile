@@ -19,24 +19,17 @@ stage('Synk-GateSonar-Security') {
 			}
   }
 
-	stage('Build') { 
-            steps { 
-               withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
-                 script{
-                 app =  docker.build("siteweb")
-                 }
-               }
-            }
-    }
-
-	stage('Push') {
+	 stages {
+        
+         stage('Logging into AWS ECR') {
             steps {
-                script{
-                    docker.withRegistry('555527584255.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws-credentials') {
-                    app.push("latest")
-                    }
+                script {
+                sh """aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 555527584255.dkr.ecr.us-east-1.amazonaws.com"""
                 }
+                 
             }
-    	}
-  }
+        }
+
+   }
+   }
 }
