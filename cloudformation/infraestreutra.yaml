@@ -105,7 +105,7 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     DependsOn: LabVPC
     Properties:
-      GroupName: SecurityAplication
+      GroupName: jenkinserver
       GroupDescription: Enable access to App
       VpcId: !Ref LabVPC
       SecurityGroupIngress:

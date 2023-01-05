@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: A simple EC2 instance
+Resources:
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0b5eea76982371e91  # CentOS.
+      InstanceType: t2.large  # core ran
+      KeyName: jenkistt
+      Monitoring: true
+      SecurityGroupIds:
+        - sg-0bf97bc97a562cf9e
+      SubnetId: subnet-0db24ce00ca82b794
+      IamInstanceProfile: LabRole
+      Tags:
+        -
+          Key: Name
+          Value: Jenkins-Server
