@@ -1,15 +1,26 @@
 pipeline {
     agent any
     stages {
-        stage('Build image') {
-            steps {
-                echo 'Starting to build docker image'
-
-                script {
-                    def customImage = docker.build("my-image:${env.BUILD_ID}")
-                    customImage.push()
-                }
-            }
+        stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
+      }
     }
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
+  }
 }
