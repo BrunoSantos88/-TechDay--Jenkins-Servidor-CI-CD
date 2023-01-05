@@ -23,15 +23,12 @@ stage('Build') {
                withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
                  script{
                  app =  docker.build("siteweb")
-                 }
+                    }
                }
             }
     }
 
 	stage('Push') {
-            steps {
-                script{
-                    docker.withRegistry('stage('Push') {
             steps {
                 script{
                     docker.withRegistry('https://555527584255.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:aws-credentials') {
@@ -42,3 +39,6 @@ stage('Build') {
     	}
 	    
   }
+}
+
+
