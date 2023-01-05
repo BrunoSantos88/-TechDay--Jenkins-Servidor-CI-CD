@@ -2,7 +2,7 @@ pipeline {
 environment {
 registry = "brunosantos88/developerpythonapp"
 registryCredential = 'dockerlogin'
-dockerImage = 'frontend'
+dockerImage = ''
 }
 
 stage('Building our image') {
