@@ -9,15 +9,6 @@ IMAGE_TAG="latest"
 REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
 }
 
-stages {
-
-stage('Cloning Git') {
-steps {
-checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url:'https://github.com/BrunoSantos88/-TechDay--Jenkins-Servidor-CI-CD.git']]])
-}
-}
-}
-
 
 stage('Building image') {
 steps{
