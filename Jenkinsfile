@@ -17,7 +17,16 @@ checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleCon
 }
 }
 }
+
+
+stage('Building image') {
+steps{
+script {
+dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+}
+}
 }
 
+}
 
 
