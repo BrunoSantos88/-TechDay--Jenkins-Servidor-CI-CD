@@ -1,23 +1,21 @@
 pipeline {
-agent any
+  agent any
+  tools { 
+        maven 'Maven 3.5.2'  
+    }
+   stages{
+    stage('SonarCloud-GateCode-Quality') {
+            steps {	
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos88-1 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=700dcb9a79ba7aa525cdf858e19ccf6ad1e59b98'
+			}
+        } 
 
-environment {
-AWS_ACCOUNT_ID="555527584255"
-AWS_DEFAULT_REGION="555527584255.dkr.ecr.us-west-2.amazonaws.com"
-IMAGE_REPO_NAME="asg"
-IMAGE_TAG="latest"
-REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-}
-
-
-stage('Building image') {
-steps{
-script {
-dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
-}
-}
-}
-
-}
+stage('Synk-GateSonar-Security') {
+            steps {		
+				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
+					sh 'mvn snyk:test -fn'
+				}
+			}
+  }
 
 
