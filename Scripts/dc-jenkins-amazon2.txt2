@@ -1,0 +1,21 @@
+FROM jenkins/jenkins:lts-jdk11
+USER root
+RUN apt update && \
+    apt install -y --no-install-recommends gnupg curl ca-certificates apt-transport-https && \
+    curl -sSfL https://apt.octopus.com/public.key | apt-key add - && \
+    sh -c "echo deb https://apt.octopus.com/ stable main > /etc/apt/sources.list.d/octopus.com.list" && \
+    apt update && apt install -y octopuscli
+RUN apt install maven -y
+RUN apt install apt-transport-https ca-certificates curl software-properties-common -y
+RUN apt update && apt install -y docker.io
+RUN gpasswd -a jenkins docker $USER
+
+RUN apt install wget
+RUN wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 && \
+    mv jq-linux64 /usr/local/bin/jq && \
+    chmod +x /usr/local/bin/jq
+VOLUME /var/run/docker.sock
+
+
+USER jenkins
+
