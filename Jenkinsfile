@@ -1,7 +1,7 @@
 pipeline {
   agent any
   tools { 
-        maven 'Maven 3.5.2'  
+        maven 'Maven 3.6.3'  
     }
    stages{
     stage('SonarCloud-GateCode-Quality') {
@@ -17,5 +17,7 @@ stage('Synk-GateSonar-Security') {
 				}
 			}
   }
+   }
+}
 
 
