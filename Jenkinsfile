@@ -13,9 +13,9 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/BrunoSantos88/Jenkins-Terraform-CI-CD--AWS.git'
            }
         }
-        stage('Terraform init Network') {
+        stage('Terraform init') {
             steps {
-                sh 'terraform init'
+                sh 'terraform init -reconfigure'
             }
         }
         stage('Apply Network') {
