@@ -23,7 +23,7 @@ resource "aws_subnet" "public_subnet" {
   availability_zone       = ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d", "us-east-1e", "us-east-1f"][count.index]
 
   tags = {
-    Name = "fronend_${count.index + 2}"
+    Name = "Frontend_${count.index + 1}"
   }
 }
 
