@@ -26,21 +26,36 @@ pipeline {
 			}
   }
   
-    stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+    stages {
+         stage('Clone repository') { 
+            steps { 
+                script{
+                checkout scm
+                }
+            }
         }
-      }
-    }
-    stage('Deploy Image') {
-      steps{
-         script {
-            docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
+
+    stage('Build') { 
+            steps { 
+                script{
+                 app = docker.build("frontend")
+                }
+            }
         }
-      }
+    stage('Test'){
+            steps {
+                 echo 'Empty'
+            }
+        }
+    stage('Deploy') {
+            steps {
+                script{
+                    docker.withRegistry('https://555527584255.dkr.ecr.us-west-2.amazonaws.com', 'ecr.us-west-2:aws-credentials') {
+                    app.push("${env.BUILD_NUMBER}")
+                    app.push("latest")
+                    }
+                }
+            }
+        }
     }
-   }
 }
