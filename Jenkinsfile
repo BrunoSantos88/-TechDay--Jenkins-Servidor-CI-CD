@@ -3,6 +3,13 @@ pipeline {
   tools { 
         maven 'Maven 3.6.3'  
     }
+    environment {
+    registry = '555527584255.dkr.ecr.us-west-2.amazonaws.com/frontend'
+    registryCredential = 'JENKINS_CREDENTIAL'
+    dockerImage = 'frontend'
+    }
+
+
    stages{
     stage('SonarCloud-GateCode-Quality') {
             steps {	
@@ -29,15 +36,14 @@ stage('Build') {
             }
     }
 
-	stage('Push') {
-            steps {
-                script{
-                    docker.withRegistry('https://555527584255.dkr.ecr.us-west-2.amazonaws.com', 'ecr:us-west-2:aws-credentials') {
-                    app.push("latest")
-                    }
+	stage('Deploy image') {
+        steps{
+            script{
+                docker.withRegistry('https://555527584255.dkr.ecr.us-west-2.amazonaws.com','ecr.us-west-2:JENKINS_CREDENTIAL') {
+                    dockerImage.push()
                 }
             }
-    	}
-	    
+        }
+    }
   }
 }
