@@ -23,7 +23,7 @@ resource "aws_subnet" "public_subnet" {
   availability_zone       = ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d", "us-east-1e", "us-east-1f"][count.index]
 
   tags = {
-    Name = "frontend_${count.index + 2}"
+    Name = "fronend_${count.index + 2}"
   }
 }
 
@@ -59,7 +59,7 @@ resource "aws_route" "default_public_route" {
 }
 
 resource "aws_security_group" "web_sg" {
-  name        = "web_sg"
+  name        = "fronend_sg"
   description = "Allow all inbound HTTP traffic"
   vpc_id      = aws_vpc.vpc.id
 
