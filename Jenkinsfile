@@ -26,21 +26,6 @@ pipeline {
 			}
   }
   
-    stage('Cloning Git') {
-      steps {
-        git 'https://github.com/BrunoSantos88/-TechDay--Jenkins-Servidor-CI-CD.git'
-      }
-    }
-    stage('Build') {
-       steps {
-         sh 'npm install'
-       }
-    }
-    stage('Test') {
-      steps {
-        sh 'npm test'
-      }
-    }
     stage('Building image') {
       steps{
         script {
