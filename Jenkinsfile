@@ -12,6 +12,14 @@ pipeline {
 
   stages{
  
+    stage('Clone repository') { 
+      steps { 
+        script{
+          checkout scm
+            }
+             } 
+    }
+
     stage('Building image') {
       steps{
         script {
