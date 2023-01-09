@@ -1,36 +1,32 @@
 pipeline {
-agent any
-options {
-skipStagesAfterUnstable()
-}
-stages {
-stage('Clone repository') { 
-steps { 
-script{
-checkout scm
-}
-}
-}
-stage('Build') { 
-            steps { 
-               withDockerRegistry([credentialsId: "dockerlogin", url: ""]) {
-                 script{
-                 app =  docker.build("frontend")
-                 }
-               }
-            }
+  agent any
+  tools { 
+        maven 'Maven 3.6.3'  
     }
 
-	stage('Push') {
-            steps {
-                script{
-                    docker.withRegistry('https://555527584255.dkr.ecr.us-east-1.amazonaws.com', 'ecr.us-east-1:aws-credentials') {
-                    app.push("latest")
-                    }
-                }
-            }
-    	}
-	    
+    environment {
+    registry = "brunosantos88/jenkinserver"
+    registryCredential = 'dockerlogin'
+    dockerImage = ''
   }
-}
 
+  stages{
+ 
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+    stage('Deploy Image') {
+      steps{
+         script {
+            docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+   }
+}
