@@ -18,14 +18,25 @@ pipeline {
 					sh 'mvn snyk:test -fn'
 				}
 			}
+  
+    stage('Build') { 
+      steps { 
+        script{
+          app = docker.build("frontend")
+         }
+      }
+    }
 
-  stage ('Docker build')
-  docker.build('frontend')
- 
-  stage 'Docker push'
-  docker.withRegistry('https://555527584255.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws-credentials') {
-    docker.image('frontend').push('latest')
+    stage('Push') {
+      steps {
+        script{
+          docker.withRegistry('https://555527584255.dkr.ecr.us-east-1.amazonaws.com', 'ecr.us-east-1:aws-credentials') {
+           app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+      }
+    }
   }
 }
 
+    }
 }
