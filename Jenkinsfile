@@ -19,15 +19,13 @@ pipeline {
 				}
 			}
 
-    stages {
-         stage('Clone repository') { 
-            steps { 
-                script{
-                checkout scm
-                }
-            }
-        }
+  stage ('Docker build')
+  docker.build('frontend')
+ 
+  stage 'Docker push'
+  docker.withRegistry('https://555527584255.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:aws-credentials') {
+    docker.image('frontend').push('latest')
+  }
+}
 
-    }
-    }
 }
