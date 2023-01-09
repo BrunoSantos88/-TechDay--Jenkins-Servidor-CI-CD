@@ -19,20 +19,31 @@ pipeline {
 				}
 			}
     }
-  
-
-    stage('Build') { 
+    stages {
+         stage('Clone repository') { 
             steps { 
                 script{
-                 app = docker.build("frontend")
+                checkout scm
                 }
             }
-    }
+        }
 
-    stage('Deploy') {
+        stage('Build') { 
+            steps { 
+                script{
+                 app = docker.build("underwater")
+                }
+            }
+        }
+        stage('Test'){
+            steps {
+                 echo 'Empty'
+            }
+        }
+        stage('Deploy') {
             steps {
                 script{
-                    docker.withRegistry('https://555527584255.dkr.ecr.us-west-2.amazonaws.com', 'ecr.us-west-2:aws-credentials') {
+                        docker.withRegistry('https://720766170633.dkr.ecr.us-east-2.amazonaws.com', 'ecr:us-east-2:aws-credentials') {
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
                     }
@@ -40,3 +51,4 @@ pipeline {
             }
         }
     }
+}
