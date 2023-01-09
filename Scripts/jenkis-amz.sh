@@ -44,3 +44,8 @@ sudo systemctl start docker
 sudo systemctl enable docker
 sudo systemctl status docker
 sudo yum install jq -y
+
+# terraform 1.37
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+sudo yum -y install terraform

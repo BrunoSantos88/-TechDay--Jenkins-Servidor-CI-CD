@@ -1,44 +1,8 @@
-FROM jenkins/jenkins:lts
-USER root
-RUN apt-get update -qq \
-    && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common
-RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
-RUN add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/debian \
-   $(lsb_release -cs) \
-   stable"
-RUN apt-get update  -qq \
-    && apt-get -y install docker-ce
-RUN apt install maven -y
-RUN apt install apt-transport-https ca-certificates curl software-properties-common -y
+FROM maven:3.8-jdk-8 as builder
+COPY . /usr/src/easybuggy/
+WORKDIR /usr/src/easybuggy/
+RUN mvn -B package
 
-#aws cli
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" 
-RUN apt-get install zip unzip -y
-RUN	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-RUN	unzip awscliv2.zip && ./aws/install
-
-# install Kubectl e EKS Cli
-RUN curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.23.7/2022-06-29/bin/linux/amd64/kubectl
-RUN chmod +x ./kubectl
-RUN mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
-RUN echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
-RUN cp kubectl /usr/local/bin/
-RUN apt-get install tar -y
-RUN curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-RUN mv /tmp/eksctl /usr/local/bin
-RUN export PATH=$PATH:/usr/local/bin
-RUN echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
-
-# terraform 
-RUN apt-get update
-# Install docker + other packages to get terraform setup
-RUN apt install docker.io gnupg curl software-properties-common -y
-# Setup terraform
-RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
-RUN apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-RUN apt update
-RUN apt install terraform
-
-    
-RUN usermod -aG docker jenkins
+FROM openjdk:8-slim
+COPY --from=builder /usr/src/easybuggy/target/easybuggy.jar /
+CMD ["java", "-XX:MaxMetaspaceSize=128m", "-Xloggc:logs/gc_%p_%t.log", "-Xmx256m", "-XX:MaxDirectMemorySize=90m", "-XX:+UseSerialGC", "-XX:+PrintHeapAtGC", "-XX:+PrintGCDetails", "-XX:+PrintGCDateStamps", "-XX:+UseGCLogFileRotation", "-XX:NumberOfGCLogFiles=5", "-XX:GCLogFileSize=10M", "-XX:GCTimeLimit=15", "-XX:GCHeapFreeLimit=50", "-XX:+HeapDumpOnOutOfMemoryError", "-XX:HeapDumpPath=logs/", "-XX:ErrorFile=logs/hs_err_pid%p.log", "-agentlib:jdwp=transport=dt_socket,server=y,address=9009,suspend=n", "-Dderby.stream.error.file=logs/derby.log", "-Dderby.infolog.append=true", "-Dderby.language.logStatementText=true", "-Dderby.locks.deadlockTrace=true", "-Dderby.locks.monitor=true", "-Dderby.storage.rowLocking=true", "-Dcom.sun.management.jmxremote", "-Dcom.sun.management.jmxremote.port=7900", "-Dcom.sun.management.jmxremote.ssl=false", "-Dcom.sun.management.jmxremote.authenticate=false", "-ea", "-jar", "easybuggy.jar"]
