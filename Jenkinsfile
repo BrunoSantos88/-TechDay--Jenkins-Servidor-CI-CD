@@ -5,7 +5,7 @@ pipeline {
     }
 
     environment {
-    registry = "brunosantos88/jenkinserver"
+    registry = "brunosantos88/appdogurudevops"
     registryCredential = 'dockerlogin'
     dockerImage = ''
   }
