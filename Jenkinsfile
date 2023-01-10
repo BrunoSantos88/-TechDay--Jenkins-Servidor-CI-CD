@@ -5,7 +5,7 @@ pipeline {
     }
 
     environment {
-    registry = "brunosantos88/awsfronten"
+    registry = "brunosantos88/frontend"
     registryCredential = 'dockerlogin'
     dockerImage = ''
   }
@@ -15,7 +15,7 @@ pipeline {
 
     stage('SonarCloud-GateCode-Quality') {
             steps {	
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos88-1 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=700dcb9a79ba7aa525cdf858e19ccf6ad1e59b98'
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos88 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=247b1dad18b8aae5c645708c4dad4a3672f0adeb'
 			}
         } 
     stage('Synk-GateSonar-Security') {
