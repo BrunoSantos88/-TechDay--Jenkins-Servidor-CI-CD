@@ -29,7 +29,7 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          dir('/frontend'){
+          dir('path/frontend'){
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
