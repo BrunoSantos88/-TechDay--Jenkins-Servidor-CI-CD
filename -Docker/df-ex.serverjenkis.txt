@@ -41,5 +41,15 @@ RUN apt update
 RUN apt install terraform
 RUN mv terraform /usr/local/bin/
 
+
+#onzap
+RUN wget https://github.com/zaproxy/zaproxy/releases/download/v2.11.1/ZAP_2_11_1_unix.sh
+RUN chmod +x ZAP_2_11_1_unix.sh 
+RUN ./ZAP_2_11_1_unix.sh -q
+RUN tar -xvf ZAP_2.11.1_Linux.tar.gz
+
+#Editor text
+RUN apt-get -y update
+RUN apt-get -y install vim nano
     
 RUN usermod -aG docker jenkins

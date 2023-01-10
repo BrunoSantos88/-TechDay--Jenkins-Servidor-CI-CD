@@ -5,7 +5,7 @@ sudo wget -O /etc/yum.repos.d/jenkins.repo \
 sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
 sudo yum upgrade -y
 #sudo yum install jenkins java-1.8.0-openjdk-devel -y
-sudo amazon-linux-extras install java-openjdk11
+sudo amazon-linux-extras install java-openjdk11 -y
 sudo yum install git -y
 sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
 sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
@@ -16,7 +16,7 @@ sudo systemctl daemon-reload
 sudo systemctl start jenkins
 sudo systemctl status jenkins
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" 
-sudo yum install unzip
+sudo yum install unzip -y
 sudo unzip awscliv2.zip  
 sudo ./aws/install
 
@@ -25,6 +25,8 @@ sudo wget https://github.com/zaproxy/zaproxy/releases/download/v2.11.1/ZAP_2_11_
 sudo chmod +x ZAP_2_11_1_unix.sh 
 sudo ./ZAP_2_11_1_unix.sh -q
 sudo tar -xvf ZAP_2.11.1_Linux.tar.gz
+
+
 curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.23.7/2022-06-29/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
@@ -49,3 +51,8 @@ sudo yum install jq -y
 sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
 sudo yum -y install terraform
+
+#nodeJS e NPM
+sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+sudo . ~/.nvm/nvm.sh
+sudo nvm install node
