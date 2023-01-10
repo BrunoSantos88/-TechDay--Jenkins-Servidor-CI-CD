@@ -29,7 +29,7 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          docker.build("frontend", ".")
+          docker.build("frontend", "-f ./frontend/ .")
         }
       }
     }
