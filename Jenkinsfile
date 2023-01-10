@@ -29,11 +29,11 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          docker.build("./frontend .")
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
-
+    
     
   
     stage('Deploy Image') {
