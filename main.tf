@@ -4,7 +4,7 @@ module "networking" {
   public_cidrs = ["172.0.1.0/24","172.0.2.0/24"]
 }
 
-module "Computing" {
-  source       = "./JksCompute"
+#module "Computing" {
+#  source       = "./JksCompute"
   
-}
+#}
