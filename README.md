@@ -6,7 +6,7 @@ Conhecendo o Sistema Operacional Linux,
 Desmistificando o Docker, Jenkins, Terraform ,SonarCloud e Synk
 Kubernetes do Zero à Produção,
 Arquiteturas de Aplicações e CI/CD na Prática,
-AWS Foundations, Terraform , docker , Kubernetes (eks) e jenkins
+AWS Foundations, Terraform , Docker , Kubernetes (eks) e Jenkins
 DevOps na Nuvem com AWS .
 _______________________________________________________________________________________________________________________________________________
 
