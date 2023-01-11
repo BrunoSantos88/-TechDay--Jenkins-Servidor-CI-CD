@@ -1,4 +1,4 @@
-variable "web_instance_type" {
+variable "jks_instance_type" {
   type    = string
   default = "t2.large"
 }
