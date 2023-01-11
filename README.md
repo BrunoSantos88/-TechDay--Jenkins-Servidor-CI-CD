@@ -46,4 +46,4 @@ Sempre estudando conteudo de SRE.Devops, Segurança, Cloud Computing e com Infra
 <img align="center" alt="Rafa-Js" height="45" width="50" src="https://user-images.githubusercontent.com/91704169/191870517-db3bd422-fd43-499b-853e-c4028cde474d.png"/><img align="center" alt="Rafa-Js" height="60" width="60" src="https://user-images.githubusercontent.com/91704169/211866642-5ec6294b-cb91-4473-9849-e115d15a001d.png" />
 <img align="center" alt="Rafa-Js" height="45" width="55" src="https://user-images.githubusercontent.com/91704169/211868831-c7a5f64d-04d9-461f-b7c0-d665f9d67eed.png"/>
 <img align="center" alt="Rafa-Js" height="60" width="60" src="https://user-images.githubusercontent.com/91704169/211872753-090358ca-a34f-4eac-8d0a-149699d4a41e.png" />
-<img align="center" alt="Rafa-Js" height="45" width="70" src="https://user-images.githubusercontent.com/91704169/211873474-1b8e982e-e6cc-41b1-847b-d1f483be89f5.png"/>
+<img align="center" alt="Rafa-Js" height="45" width="70" src="https://user-images.githubusercontent.com/91704169/211873981-07625883-ca60-4d6d-9a1b-4c9a4d97059c.png"/>
