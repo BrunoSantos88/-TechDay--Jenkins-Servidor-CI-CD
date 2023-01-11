@@ -20,7 +20,6 @@ pipeline {
              } 
     }
 
-<<<<<<< HEAD
     stage('SonarCloud-GateCode-Quality') {
             steps {	
 		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=ef814cbc7a3bebcd87e212e7638a2bd75e41bb62'
@@ -33,8 +32,6 @@ pipeline {
 				}
 			}
   }
-=======
->>>>>>> 7914c0bd96bda6d1d9a6be5c1fe8ecbd6a0cfb83
 
     stage('TF init') {
             steps {
@@ -57,8 +54,3 @@ pipeline {
         }
         }
   }
-<<<<<<< HEAD
-
-  
-=======
->>>>>>> 7914c0bd96bda6d1d9a6be5c1fe8ecbd6a0cfb83
