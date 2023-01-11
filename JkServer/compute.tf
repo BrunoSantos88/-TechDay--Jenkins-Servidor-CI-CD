@@ -1,5 +1,4 @@
 resource "aws_instance" "jks" {
-  count                       = 1
   ami                         = "ami-0b5eea76982371e91"  #mazonlinuz2
   instance_type               = var.web_instance_type  #T2 LARGE
   availability_zone           = "us-east-1a"
