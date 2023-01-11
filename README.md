@@ -35,7 +35,7 @@ Sempre estudando conteudo de SRE.Devops, Segurança, Cloud Computing e com Infra
 
 <p align="left">
            
-<img align="center" alt="Rafa-Js" height="60" width="55" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg" />
+<img align="center" alt="Rafa-Js" height="65" width="55" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg" />
 <img align="center" alt="Rafa-Js" height="50" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/putty/putty-original.svg" />
 <img align="center" alt="Rafa-Js" height="50" width="55" src="https://user-images.githubusercontent.com/91704169/190546385-e769a76d-f66b-4a68-aae8-2b4a159284be.png" />
 <img align="center" alt="Rafa-Js" height="55" width="40" src="https://user-images.githubusercontent.com/91704169/191962723-bfff842e-3f17-4ca8-8767-76303d260623.png"/>
