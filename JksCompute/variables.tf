@@ -1,6 +1,6 @@
 # --- comput/variables.tf ---
 
-variable "web_sg" {}
+variable "jks-sg" {}
 variable "public_subnet" {}
 
 

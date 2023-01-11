@@ -1,13 +1,7 @@
-# --- networking/outputs.tf ---
-
 output "vpc_id" {
-  value = aws_vpc.vpc.id
+  value = aws_vpc.jks_vpc.id
 }
 
-output "web_sg" {
-  value = aws_security_group.web_sg.id
-}
-
-output "public_subnet" {
-  value = aws_subnet.public_subnet.id
+output "jks-sg" {
+  value = aws_security_group.jks-sg.id
 }
