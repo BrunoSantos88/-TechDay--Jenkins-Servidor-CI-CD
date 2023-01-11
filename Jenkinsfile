@@ -1,21 +1,28 @@
 pipeline {
   agent any
   tools { 
-        maven 'Maven 3.6.3'  
+        maven 'Maven 3.6.3' 
+        terraform 'Terraform 1.3.7' 
     }
 
     environment {
-    registry = "brunosantos88/frontend"
-    registryCredential = 'dockerlogin'
-    dockerImage = ''
-  }
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
 
-
-  stages{
+        stages {
+        
+    stage('Clone repository') { 
+      steps { 
+        script{
+          checkout scm
+            }
+             } 
+    }
 
     stage('SonarCloud-GateCode-Quality') {
             steps {	
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos88 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=247b1dad18b8aae5c645708c4dad4a3672f0adeb'
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=ef814cbc7a3bebcd87e212e7638a2bd75e41bb62'
 			}
         } 
     stage('Synk-GateSonar-Security') {
@@ -25,22 +32,27 @@ pipeline {
 				}
 			}
   }
+
+    stage('TF init') {
+            steps {
+                sh 'terraform init '
+                
+            }
+        }
+
+        stage('TF fmt') {
+            steps {
+                sh 'terraform fmt '
+                
+            }
+        }
+
+        stage('TF apply') {
+            steps {
+          sh 'terraform apply -auto-approve'
+            }
+        }
+        }
+  }
+
   
-    stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
-      }
-    }
-    stage('Deploy Image') {
-      steps{
-         script {
-            docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
-        }
-      }
-    }
-   }
-}
