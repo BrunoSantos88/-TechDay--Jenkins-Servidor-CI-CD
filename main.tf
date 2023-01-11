@@ -4,7 +4,7 @@ module "networking" {
   public_cidrs = ["172.0.1.0/24"]
 }
 
-module "networking" {
+module "compute" {
   source       = "./compute"
   
 }
