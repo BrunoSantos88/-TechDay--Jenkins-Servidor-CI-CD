@@ -47,9 +47,9 @@ pipeline {
             }
         }
 
-        stage('TF apply') {
+        stage('TF Destroy') {
             steps {
-          sh 'terraform apply -auto-approve'
+          sh 'terraform Destroy -auto-approve'
             }
         }
         }
