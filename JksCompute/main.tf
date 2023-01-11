@@ -16,15 +16,14 @@ data "aws_ami" "linux" {
   owners = ["amazon"]
 }
 
-
-resource "aws_launch_template" "jks" {
-  name_prefix            = "jenkins-server"
+resource "aws_launch_template" "web" {
+  name_prefix            = "Jenkis*Server"
   image_id               = data.aws_ami.linux.id
   instance_type          = var.web_instance_type
   vpc_security_group_ids = [var.web_sg]
   user_data              = filebase64("Scripts/jenkis-amz.sh")
 
   tags = {
-    Name = "jenkins-server"
+    Name = "Jenkis_Server"
   }
 }

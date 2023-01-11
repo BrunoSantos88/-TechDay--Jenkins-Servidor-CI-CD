@@ -1,7 +1,7 @@
 # --- networking/outputs.tf ---
 
 output "vpc_id" {
-  value = aws_vpc.jenkins_vpc.id
+  value = aws_vpc.vpc.id
 }
 
 output "web_sg" {
@@ -9,5 +9,5 @@ output "web_sg" {
 }
 
 output "public_subnet" {
-  value = aws_subnet.jenkins_subnet_public
+  value = aws_subnet.public_subnet.id
 }
