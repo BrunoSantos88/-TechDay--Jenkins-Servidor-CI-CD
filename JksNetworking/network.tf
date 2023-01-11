@@ -52,7 +52,8 @@ resource "aws_route_table" "eks_public_rt" {
 
 }
 
-resource "aws_security_group" "jks_sg" {
+
+resource "aws_security_group" "web_sg" {
   name        = "web_sg"
   description = "Allow all inbound HTTP traffic"
   vpc_id      = aws_vpc.jenkins_vpc.id

@@ -20,8 +20,8 @@ data "aws_ami" "linux" {
 resource "aws_launch_template" "jks" {
   name_prefix            = "jenkins-server"
   image_id               = data.aws_ami.linux.id
-  instance_type          = var.jks_instance_type
-  vpc_security_group_ids = [var.jks_sg]
+  instance_type          = var.web_instance_type
+  vpc_security_group_ids = [var.web_sg]
   user_data              = filebase64("Scripts/jenkis-amz.sh")
 
   tags = {
