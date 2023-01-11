@@ -8,7 +8,7 @@ Kubernetes do Zero à Produção,
 Arquiteturas de Aplicações e CI/CD na Prática,
 Conhecimentos Usado: AWS Foundations, Terraform , Docker , Kubernetes (eks) e Jenkins <p/>
 BootLab DevOps na Nuvem com AWS, usando os serviços AWS: EC2, ECR, EKS e VPC , subnets , peering , Internet GW E NAT GW. </p>
-Docker: dockerfile, build e Push para o serviço ECR(AWS).
+Docker: dockerfile, Build e Push para o serviço ECR(AWS).
 ______________________________________________________________________________________________________________________________________________
 
 💌 Entre em contato comigo :) // contact me ⤵
