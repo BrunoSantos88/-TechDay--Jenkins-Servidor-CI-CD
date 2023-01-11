@@ -5,3 +5,8 @@ output "vpc_id" {
 output "jks-sg" {
   value = aws_security_group.jks-sg.id
 }
+
+output "compute" {
+  value = aws_instance.jks.id
+
+}

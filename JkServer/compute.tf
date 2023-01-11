@@ -3,13 +3,13 @@ resource "aws_instance" "jks" {
   image_id                    = "ami-0b5eea76982371e91"  #mazonlinuz2
   instance_type               = var.web_instance_type  #T2 LARGE
   availability_zone           = "us-east-1a"
-  subnet_id                   = "subnet-0e4576d780689e0b9"
+  subnet_id                   = aws_subnet.jks_subnet_public_1a.id
   associate_public_ip_address = true
   key_name                    = "minhaaws"  #CHAVE SSH
 
 
   vpc_security_group_ids = [    ## portas 80, 8081, 22
-   "sg-03537595b6c97fa4a"
+   aws_security_group.jks-sg.id
   ]
 
   root_block_device {
