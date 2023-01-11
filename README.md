@@ -1,13 +1,14 @@
 
-# Tech-Day---Jenkins -Desafio
+# Tech-Day---Jenkins -Desafio -- DevOps GURU Devsecops Udemy "DevSecOps with Jenkins, Kubernetes, Terraform & AWS"
 
 Prepare-se Para a Jornada (Onboarding),
 Conhecendo o Sistema Operacional Linux,
-Desmistificando o Docker, Jenkins, Terraform ,SonarCloud e Synk
+Desmistificando o Docker, Jenkins, Terraform ,SonarCloud e Synk e
 Kubernetes do Zero à Produção,
 Arquiteturas de Aplicações e CI/CD na Prática,
-AWS Foundations, Terraform , Docker , Kubernetes (eks) e Jenkins <p/>
+Conhecimentos Usado: AWS Foundations, Terraform , Docker , Kubernetes (eks) e Jenkins <p/>
 BootLab DevOps na Nuvem com AWS, usando os serviços AWS: EC2, ECR, EKS e VPC , subnets , peering , Internet GW E NAT GW.
+Docker: dockerfile, build e Push para o serviço ECR(AWS).
 ______________________________________________________________________________________________________________________________________________
 
 💌 Entre em contato comigo :) // contact me ⤵
