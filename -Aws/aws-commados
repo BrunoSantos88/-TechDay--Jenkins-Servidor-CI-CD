@@ -1,0 +1,4 @@
+###
+
+#eks .kube/config
+aws eks --region  update-kubeconfig --name terraformEKScluster
