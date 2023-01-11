@@ -9,6 +9,19 @@ Arquiteturas de Aplicações e CI/CD na Prática,
 Conhecimentos Usado: AWS Foundations, Terraform , Docker , Kubernetes (eks) e Jenkins <p/>
 BootLab DevOps na Nuvem com AWS, usando os serviços AWS: EC2, ECR, EKS e VPC , subnets , peering , Internet GW E NAT GW. </p>
 Docker: dockerfile, Build e Push para o serviço ECR(AWS).
+
+______________________________________________________________________________________________________________________________________________
+Desafio 1: Subir jenkins para aws. nesse caso, usei um jenkins na minha maquina local
+repositorio usando raiz. Link https://github.com/BrunoSantos88/-TechDay--Jenkins-Servidor-CI-CD.git
+
+<p align="left">
+       
+<img align="center" alt="Rafa-Js" height="8000" width="800" src="https://user-images.githubusercontent.com/91704169/211863070-1e635ce1-06d5-4f06-899b-79eb8be1acd9.png" />    
+
+
+
+
+
 ______________________________________________________________________________________________________________________________________________
 
 💌 Entre em contato comigo :) // contact me ⤵
