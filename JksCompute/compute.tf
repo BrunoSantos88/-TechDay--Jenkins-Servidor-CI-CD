@@ -1,20 +1,20 @@
 resource "aws_instance" "jks" {
   count                       = 1
-  image_id                    = "ami-0b5eea76982371e91"
-  instance_type               = var.web_instance_type
+  image_id                    = "ami-0b5eea76982371e91"  #mazonlinuz2
+  instance_type               = var.web_instance_type  #T2 LARGE
   availability_zone           = "us-east-1a"
   subnet_id                   = var.public_subnet.id
   associate_public_ip_address = true
-  key_name                    = "minhaaws"
+  key_name                    = "minhaaws"  #CHAVE SSH
 
 
-  vpc_security_group_ids = [
+  vpc_security_group_ids = [    ## portas 80, 8081, 22
    var.jks-sg.id
   ]
 
   root_block_device {
     delete_on_termination = true
-    volume_size           = 50
+    volume_size           = 50  #SSD
     volume_type           = "gp2"
 
 
@@ -30,5 +30,5 @@ resource "aws_instance" "jks" {
     Managed     = "IAC"
   }
 
- user_data = filebase64("Scripts/jenkis-amz.sh")
+ user_data = filebase64("Scripts/jenkis-amz.sh")  ##SHELLSCRIPT
 }
