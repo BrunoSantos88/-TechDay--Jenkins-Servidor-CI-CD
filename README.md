@@ -7,8 +7,8 @@ Desmistificando o Docker, Jenkins, Terraform ,SonarCloud e Synk
 Kubernetes do Zero à Produção,
 Arquiteturas de Aplicações e CI/CD na Prática,
 AWS Foundations, Terraform , Docker , Kubernetes (eks) e Jenkins <p/>
-DevOps na Nuvem com AWS .
-_______________________________________________________________________________________________________________________________________________
+BootLab DevOps na Nuvem com AWS, usando os serviços AWS: EC2, ECR, EKS e VPC , subnets , peering , Internet GW E NAT GW.
+______________________________________________________________________________________________________________________________________________
 
 💌 Entre em contato comigo :) // contact me ⤵
 </p>
