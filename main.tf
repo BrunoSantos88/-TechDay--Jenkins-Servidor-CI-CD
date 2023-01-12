@@ -1,3 +1,4 @@
-module "IF.Estrutura" {
-  source       = "./QA-JkS-SonarQub-IF"
+module "projetodevops" {
+  source       = "./ProjetoJskinsSonar"
 }
+
