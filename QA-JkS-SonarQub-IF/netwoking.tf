@@ -67,3 +67,18 @@ resource "aws_route_table" "jks_public_rt" {
   }
 
 }
+
+
+###RedeBancoDeDados
+
+resource "aws_db_subnet_group" "networkingdb" {
+  name       = "networkingDB"
+  subnet_ids = [aws_subnet.jks_subnet_public_1a.id,aws_subnet.jks_subnet_public_1b.id]
+
+  tags = {
+    Name        = "REDE-SUBNETS"
+    Environment = "networkingDB"
+    INFRA       = "SUBENTS_GROUP_ABC"
+    Managed     = "IAC"
+  }
+}
