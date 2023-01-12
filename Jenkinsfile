@@ -23,7 +23,7 @@ pipeline {
    ///Qualite gate
     stage('SonarCloud-GateCode-Quality') {
             steps {	
-		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=SONAR_CLOUD'
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=fc8f04f3543d8b4d9217a0b20fe72a02521694aa'
 			}
         } 
     stage('Synk-GateSonar-Security') {
@@ -66,13 +66,13 @@ pipeline {
         success {
             mail to: 'infratidevops@gmail.com',
                  subject: "SUCCESS: ${currentBuild.fullDisplayName}",
-                 body: "Test Complete Build passed."
+                 body: "Pipeline passou, Efetou com Sucesso"
 
         }
         failure {
            mail to: 'infratidevops@gmail.com',
                 subject:"FAILURE: ${currentBuild.fullDisplayName}",
-                body: "Test Complete Build failed."
+                body: "Pipeline Falhou , verificar os parametros corretos!"
 
         }
   }
