@@ -26,7 +26,7 @@ sudo chmod +x ZAP_2_11_1_unix.sh
 sudo ./ZAP_2_11_1_unix.sh -q
 sudo tar -xvf ZAP_2.11.1_Linux.tar.gz
 
-
+#kubectl
 curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.23.7/2022-06-29/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
@@ -56,3 +56,14 @@ sudo yum -y install terraform
 sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
 sudo . ~/.nvm/nvm.sh
 sudo nvm install node
+
+#SonarScanner
+
+sudo yum install wget unzip -y
+Sudo wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+Sudo unzip sonar-scanner-cli-4.6.2.2472-linux.zip -d /opt/
+Sudo mv /opt/sonar-scanner-4.6.2.2472-linux /opt/sonar-scanner
+sudo chown -R jenkins:jenkins /opt/sonar-scanner
+Sudo echo 'export PATH=$PATH:/opt/sonar-scanner/bin' | sudo tee -a /etc/profile
+Sudo curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
+sudo yum install nodejs -y

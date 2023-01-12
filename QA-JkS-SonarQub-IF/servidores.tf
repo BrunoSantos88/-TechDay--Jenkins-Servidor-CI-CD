@@ -53,7 +53,7 @@ resource "aws_instance" "SonarQube" {
 
 
     tags = {
-      Name = "SonarQube_Sever"
+      Name = "SonarQube*Sever"
     }
   }
 

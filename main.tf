@@ -1,3 +1,3 @@
-module "Servidor" {
-  source       = "./JkServer"
+module "IF.Estrutura" {
+  source       = "./QA-JkS-SonarQub-IF"
 }
