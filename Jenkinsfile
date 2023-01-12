@@ -52,7 +52,7 @@ pipeline {
 
         stage('TF Destroy') {
             steps {
-          sh 'terraform destroy -auto-approve -target=module.projetodevops'
+          sh 'terraform destroy -auto-approve'
             }
         }
         }
