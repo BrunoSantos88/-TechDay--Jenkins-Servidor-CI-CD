@@ -54,9 +54,9 @@ pipeline {
 			}
   }
 
-   stage('Slack Notification(Terraform)') {
+   stage('Slack Notification(Terraform Start Process)') {
             steps {
-              slackSend message: 'Agora está iniciando processo de construção da infra-estrutura na AWS. Caso já esteja contrida, No processo , o commando "terraform fmt" , vai atualizar somente oque foi alterado ou adicionadooa Projeto!'
+              slackSend message: 'Agora está iniciando processo de construção da infra-estrutura da AWS. O commando "terraform fmt" , vai atualizar somente oque foi alterado ou adicionado ao projeto!'
                 }
             }
 
@@ -69,7 +69,7 @@ pipeline {
             }
         }
 
-        stage('TF Formatar Version') {
+        stage('TF FMT') {
             steps {
                 sh 'terraform fmt '
                 
