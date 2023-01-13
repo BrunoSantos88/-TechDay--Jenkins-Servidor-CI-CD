@@ -15,6 +15,14 @@ pipeline {
 // Stages.
   stages {   
 
+    stage('Slack') {
+      steps {
+        slackSend message: 'Pipeline Inciada! Necessidade de Atenção, caso seja em Produção!'
+
+}
+}
+}
+
     stage('Clone repository') { 
       steps { 
         script{
