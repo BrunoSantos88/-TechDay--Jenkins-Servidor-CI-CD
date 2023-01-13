@@ -1,5 +1,6 @@
 pipeline {
   agent any
+
   tools { 
         ///depentencias 
         maven 'Maven 3.6.3' 
@@ -14,21 +15,32 @@ pipeline {
 // Stages.
   stages {   
 
-      stage('Slack') {
-      steps {
-        slackSend message: 'Pipeline Iniciada'
-
-}
-}
+        stage('Notification Slack') {
+            steps {
+              steps {
+              slackSend message: 'Pipeline Iniciada'
+                }
+            }
+        }
 
     stage('Clone repository') { 
       steps { 
         script{
           checkout scm
-          
             }
              } 
     }
+
+
+    stage('Notification SLACK') {
+            steps {
+              steps {
+              slackSend message: 'Inicio teste Software e Segurança'
+                }
+            }
+        }
+
+
    ///Qualite gate
     stage('SonarCloud-GateCode-Quality') {
             steps {	
@@ -42,6 +54,14 @@ pipeline {
 				}
 			}
   }
+
+   stage('Notification SLACK') {
+            steps {
+              steps {
+              slackSend message: 'Inicio Execuçao da InfraEstrura Na AWS'
+                }
+            }
+        }
 
 
 ///INFRA iS CODE 
@@ -85,4 +105,13 @@ pipeline {
 
         }
   }
+
+  stage('Notification SLACK') {
+            steps {
+              steps {
+              slackSend message: 'Pipeline Finalizada.'
+              
+                }
+            }
+        }
 }
