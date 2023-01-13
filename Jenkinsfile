@@ -14,19 +14,18 @@ pipeline {
 // Stages.
   stages {   
 
-    stage('Slack') {
+      stage('Slack') {
       steps {
         slackSend message: 'Pipeline Iniciada'
 
 }
 }
-  }
 
     stage('Clone repository') { 
       steps { 
         script{
           checkout scm
-          slackSend message: 'Repositorio foi Clonado'
+          
             }
              } 
     }
@@ -34,14 +33,12 @@ pipeline {
     stage('SonarCloud-GateCode-Quality') {
             steps {	
 		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=fc8f04f3543d8b4d9217a0b20fe72a02521694aa'
-    slackSend message: 'Passou qualidade do codigo.'
 			}
         } 
     stage('Synk-GateSonar-Security') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-				sh 'mvn snyk:test -fn'
-        slackSend message: 'Passou test segurança.'
+					sh 'mvn snyk:test -fn'
 				}
 			}
   }
@@ -51,7 +48,6 @@ pipeline {
     stage('TF INICIAR') {
             steps {
                 sh 'terraform init '
-                slackSend message: 'inicio terraform'
                 
             }
         }
@@ -66,7 +62,6 @@ pipeline {
         stage('TF Appove') {
             steps {
           sh 'terraform apply -auto-approve'
-          slackSend message: 'Terminou de criar InfraEstrutura'
             }
         }
         }
@@ -81,14 +76,13 @@ pipeline {
             mail to: 'infratidevops@gmail.com',
                  subject: "SUCCESS: ${currentBuild.fullDisplayName}",
                  body: "Pipeline passou, Efetou com Sucesso"
-                 slackSend message: 'Tudo Certo, Pipeline foi Aprovada.'
 
-        } 
+        }
         failure {
            mail to: 'infratidevops@gmail.com',
                 subject:"FAILURE: ${currentBuild.fullDisplayName}",
                 body: "Pipeline Falhou , verificar os parametros corretos!"
-                slackSend message: 'Não passou, Pipeline foi reprovada, é bom verificar alguns estagio da Pipeline e verificar.'
 
         }
   }
+}
