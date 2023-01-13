@@ -86,13 +86,4 @@ pipeline {
 
         }
   }
-
-  stage('Notification-Finish') {
-            steps {
-              steps {
-              slackSend message: 'Pipeline Finalizada.'
-              
-                }
-            }
-        }
 }
