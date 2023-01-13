@@ -36,7 +36,7 @@ resource "aws_instance" "jks" {
 resource "aws_instance" "SonarQube" {
   ami                         = "ami-0b5eea76982371e91"  #mazonlinuz2
   instance_type               = var.Sonar_instance_type  #T2 LARGE
-  availability_zone           = "us-east-1a"
+  availability_zone           = "us-east-1b"
   subnet_id                   = aws_subnet.jks_subnet_public_1b.id
   associate_public_ip_address = true
   key_name                    = "minhaaws"  #CHAVE SSH
