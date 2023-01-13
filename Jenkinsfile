@@ -15,7 +15,7 @@ pipeline {
 // Stages.
   stages {   
 
-    stage('Slack Notification') {
+    stage('Slack Notification(Start)') {
       steps {
         slackSend message: 'Pipeline Inciada!. Necessidade de atenção, caso seja em Produção!'
 
@@ -101,7 +101,7 @@ pipeline {
 
       }
 
-  stage('Slack Notification(Processo Encerrado))') {
+  stage('Slack Notification(Finish)') {
             steps {
               slackSend message: 'Agora está iniciando processo de construção da infra-estrutura na AWS. Caso já esteja contrida, No processo , o commando "terraform fmt" , vai atualizar somente oque foi alterado ou adicionadooa Projeto!'
                 }
