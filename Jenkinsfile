@@ -99,11 +99,11 @@ pipeline {
 
         }
 
-        stage('Slack Notification(Finish') {
+      }
+
+       stage('Slack Notification(Finish') {
             steps {
               slackSend message: 'O Processo de Pipeline finalizou!'
                 }
             }
-
-      }
   }
