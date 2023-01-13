@@ -32,7 +32,7 @@ pipeline {
 
   stage('Slack Notification(test unit code and vulnerability)') {
     steps {
-      slackSend message: 'Pipeline está no Estagio de teste no codigo. O Processo será realiazado emQuality Gate teste de Sonar e Synk, ambos vai verificar bugs e vulnerabilidade em nosso codigo!'
+      slackSend message: 'Pipeline está no estagio de teste no codigo. O Processo será realiazado no Quality Gate, são teste de Sonar e Synk, ambos vão verificar "bugs e vulnerabilidade" em nosso codigo!'
 
 }
 }
@@ -53,7 +53,7 @@ pipeline {
 
    stage('Slack Notification(Terraform)') {
             steps {
-              slackSend message: 'Agora está iniciando processo de construção da infra-estrutura!'
+              slackSend message: 'Agora está iniciando processo de construção da infra-estrutura na AWS. Caso já esteja contrida, No processo , o commando "terraform fmt" , vai atualizar somente oque foi alterado ou adicionadooa Projeto!'
                 }
             }
 
@@ -98,5 +98,12 @@ pipeline {
                 body: "Pipeline Falhou , verificar os parametros corretos!"
 
         }
+
+        stage('Slack Notification(Finish') {
+            steps {
+              slackSend message: 'O Processo de Pipeline finalizou!'
+                }
+            }
+
       }
   }
