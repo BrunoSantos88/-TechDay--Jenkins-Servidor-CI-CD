@@ -53,7 +53,6 @@ pipeline {
 
    stage('Slack Notification(Terraform)') {
             steps {
-              steps {
               slackSend message: 'Agora está iniciando processo de construção da infra-estrutura!'
                 }
             }
@@ -101,7 +100,6 @@ pipeline {
         }
 
         stage('Slack Notification(Finish)') {
-            steps {
               steps {
               slackSend message: 'Pipelina foi finalizada!'
 
