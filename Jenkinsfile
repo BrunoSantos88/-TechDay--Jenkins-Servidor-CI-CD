@@ -80,12 +80,6 @@ pipeline {
         }
         }
 
-      stage('Slack Notification(Processo Encerrado))') {
-            steps {
-              slackSend message: 'Agora está iniciando processo de construção da infra-estrutura na AWS. Caso já esteja contrida, No processo , o commando "terraform fmt" , vai atualizar somente oque foi alterado ou adicionadooa Projeto!'
-                }
-            }
-
 
 // Email Notification
       post {
@@ -106,4 +100,10 @@ pipeline {
         }
 
       }
-  }
+
+  stage('Slack Notification(Processo Encerrado))') {
+            steps {
+              slackSend message: 'Agora está iniciando processo de construção da infra-estrutura na AWS. Caso já esteja contrida, No processo , o commando "terraform fmt" , vai atualizar somente oque foi alterado ou adicionadooa Projeto!'
+                }
+            }
+}
