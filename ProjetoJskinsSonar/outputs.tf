@@ -7,7 +7,7 @@ output "security-group" {
 }
 
 output "subnet_db" {
-  value = aws_db_subnet_group.networkingdb.id
+  value = aws_db_subnet_group.net-dados.id
 }
 
 
