@@ -80,11 +80,12 @@ pipeline {
         }
         }
 
-    stage('Slack Notification(Finish') {
+      stage('Slack Notification(Processo Encerrado))') {
             steps {
-              slackSend message: 'O Processo de Pipeline finalizou!. Email com resultado do processo será enviado!.'
+              slackSend message: 'Agora está iniciando processo de construção da infra-estrutura na AWS. Caso já esteja contrida, No processo , o commando "terraform fmt" , vai atualizar somente oque foi alterado ou adicionadooa Projeto!'
                 }
             }
+
 
 // Email Notification
       post {
