@@ -81,6 +81,41 @@ pipeline {
         }
 
 
+//slack Notificarion
+      stage('Notification Error') {
+            // when doError is equal to 1, return an error
+            when {
+                expression { doError == '1' }
+            }
+            steps {
+                echo "Pipeline Failure :("
+                error "Test failed on purpose, doError == str(1)"
+            }
+        }
+        stage('Notification Success') {
+            // when doError is equal to 0, just print a simple message
+            when {
+                expression { doError == '0' }
+            }
+            steps {
+                echo "Pipeline Success :)"
+            }
+        }
+    }
+
+// Post-build actions
+    post {
+        always {
+            script {
+                BUILD_USER = getBuildUser()
+            }
+            echo 'I will always say hello in the console.'
+            slackSend channel: '#slack-test-channel',
+                color: COLOR_MAP[currentBuild.currentResult],
+                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} by ${BUILD_USER}\n More info at: ${env.BUILD_URL}"
+        }
+
+
 // Email Notification
       post {
         always {
@@ -98,12 +133,5 @@ pipeline {
                 body: "Pipeline Falhou , verificar os parametros corretos!"
 
         }
-
       }
-
-  stage('Slack Notification(Finish)') {
-            steps {
-              slackSend message: 'Agora está iniciando processo de construção da infra-estrutura na AWS. Caso já esteja contrida, No processo , o commando "terraform fmt" , vai atualizar somente oque foi alterado ou adicionadooa Projeto!'
-                }
-            }
 }
