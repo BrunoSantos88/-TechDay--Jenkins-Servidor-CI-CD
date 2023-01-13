@@ -15,7 +15,11 @@ pipeline {
 // Stages.
   stages {   
 
+<<<<<<< HEAD
         stage('Notification Start') {
+=======
+        stage('Notification Slack') {
+>>>>>>> 53578837c0738ca995d04a2465603fda5384e99f
             steps {
               steps {
               slackSend message: 'Pipeline Iniciada'
@@ -32,7 +36,11 @@ pipeline {
     }
 
 
+<<<<<<< HEAD
     stage('Notification Test Unit') {
+=======
+    stage('Notification SLACK') {
+>>>>>>> 53578837c0738ca995d04a2465603fda5384e99f
             steps {
               steps {
               slackSend message: 'Inicio teste Software e Segurança'
@@ -55,7 +63,11 @@ pipeline {
 			}
   }
 
+<<<<<<< HEAD
    stage('Notification Start IAAS Code') {
+=======
+   stage('Notification SLACK') {
+>>>>>>> 53578837c0738ca995d04a2465603fda5384e99f
             steps {
               steps {
               slackSend message: 'Inicio Execuçao da InfraEstrura Na AWS'
@@ -106,7 +118,11 @@ pipeline {
         }
   }
 
+<<<<<<< HEAD
   stage('Notification Finish Project') {
+=======
+  stage('Notification SLACK') {
+>>>>>>> 53578837c0738ca995d04a2465603fda5384e99f
             steps {
               steps {
               slackSend message: 'Pipeline Finalizada.'
