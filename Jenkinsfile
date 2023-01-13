@@ -30,13 +30,14 @@ pipeline {
              } 
     }
 
-    stage('Slack Notification(test unit code)') {
-      steps {
-        slackSend message: 'Pipeline Inciada!. Necessidade de atenção, caso seja em Produção!'
+  stage('Slack Notification(test unit code and vulnerability)') {
+    steps {
+      slackSend message: 'Pipeline está no Estagio de teste no codigo. O Processo será realiazado em
+      Quality Gate teste de Sonar e Synk, ambos vai verificar bugs e vulnerabilidade em nosso codigo!'
 
 }
 }
-
+ 
    ///Qualite gate
     stage('SonarCloud-GateCode-Quality') {
             steps {	
@@ -51,13 +52,12 @@ pipeline {
 			}
   }
 
-   stage('Notification SLACK') {
+   stage('Slack Notification(Terraform)') {
             steps {
               steps {
-              slackSend message: 'Inicio Execuçao da InfraEstrura Na AWS'
+              slackSend message: 'Agora está iniciando processo de construção da infra-estrutura!'
                 }
             }
-        }
 
 
 ///INFRA iS CODE 
@@ -100,5 +100,14 @@ pipeline {
                 body: "Pipeline Falhou , verificar os parametros corretos!"
 
         }
+
+        stage('Slack Notification(Finish)') {
+            steps {
+              steps {
+              slackSend message: 'Pipelina foi finalizada, Se Houve algun problema no processo, foi enviado um email relatando oque houve!
+              Processo terminou'
+
+                }
+            }
   }
 }
