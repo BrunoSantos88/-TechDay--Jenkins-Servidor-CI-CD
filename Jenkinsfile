@@ -98,6 +98,7 @@ pipeline {
                 body: "Pipeline Falhou , verificar os parametros corretos!"
 
         }
+      }
 
         stage('Slack Notification(Finish)') {
               steps {
@@ -106,4 +107,3 @@ pipeline {
                 }
             }
   }
-}
