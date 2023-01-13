@@ -80,8 +80,13 @@ pipeline {
         }
         }
 
+    stage('Slack Notification(Finish') {
+            steps {
+              slackSend message: 'O Processo de Pipeline finalizou!. Email com resultado do processo será enviado!.'
+                }
+            }
 
-//Notification
+// Email Notification
       post {
         always {
             echo "Notifying build result by email"
@@ -100,10 +105,4 @@ pipeline {
         }
 
       }
-
-       stage('Slack Notification(Finish') {
-            steps {
-              slackSend message: 'O Processo de Pipeline finalizou!'
-                }
-            }
   }
