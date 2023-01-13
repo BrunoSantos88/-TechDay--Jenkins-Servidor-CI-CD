@@ -1,3 +1,10 @@
+def COLOR_MAP = [...]
+def getBuildUser(){...}
+
+def getBuildUser() {
+    return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
+}
+
 pipeline {
   agent any
 
@@ -6,8 +13,11 @@ pipeline {
         maven 'Maven 3.6.3' 
         terraform 'Terraform 1.3.7' 
     }
-        // Chave AWS
         environment {
+        // test variable: 0=success, 1=fail; must be string
+        doError = '0'
+        BUILD_USER = ''
+        //aws
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
@@ -82,28 +92,29 @@ pipeline {
 
 
 //slack Notificarion
-      stage('Notification Error') {
+      stages {
+        stage('Error') {
             // when doError is equal to 1, return an error
             when {
                 expression { doError == '1' }
             }
             steps {
-                echo "Pipeline Failure :("
+                echo "Failure :("
                 error "Test failed on purpose, doError == str(1)"
             }
         }
-        stage('Notification Success') {
+        stage('Success') {
             // when doError is equal to 0, just print a simple message
             when {
                 expression { doError == '0' }
             }
             steps {
-                echo "Pipeline Success :)"
+                echo "Success :)"
             }
         }
     }
 
-// Post-build actions
+    // Post-build actions
     post {
         always {
             script {
@@ -114,7 +125,7 @@ pipeline {
                 color: COLOR_MAP[currentBuild.currentResult],
                 message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} by ${BUILD_USER}\n More info at: ${env.BUILD_URL}"
         }
-
+    }
 
 // Email Notification
       post {
