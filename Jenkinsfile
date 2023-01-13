@@ -36,23 +36,23 @@ pipeline {
 
 
 ///INFRA iS CODE 
-    stage('TF INIT') {
+    stage('TF INICIAR') {
             steps {
                 sh 'terraform init '
                 
             }
         }
 
-        stage('TF FMT') {
+        stage('TF Formatar Version') {
             steps {
                 sh 'terraform fmt '
                 
             }
         }
 
-        stage('TF Destroy') {
+        stage('TF Appove') {
             steps {
-          sh 'terraform destroy -auto-approve'
+          sh 'terraform apply -auto-approve'
             }
         }
         }
