@@ -15,9 +15,9 @@ pipeline {
 // Stages.
   stages {   
 
-    stage('Slack') {
+    stage('Slack Notification') {
       steps {
-        slackSend message: 'Pipeline Inciada! Necessidade de Atenção, caso seja em Produção!'
+        slackSend message: 'Pipeline Inciada!. Necessidade de atenção, caso seja em Produção!'
 
 }
 }
@@ -29,6 +29,13 @@ pipeline {
             }
              } 
     }
+
+    stage('Slack Notification(test unit code)') {
+      steps {
+        slackSend message: 'Pipeline Inciada!. Necessidade de atenção, caso seja em Produção!'
+
+}
+}
 
    ///Qualite gate
     stage('SonarCloud-GateCode-Quality') {
