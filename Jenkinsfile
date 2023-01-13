@@ -32,8 +32,7 @@ pipeline {
 
   stage('Slack Notification(test unit code and vulnerability)') {
     steps {
-      slackSend message: 'Pipeline está no Estagio de teste no codigo. O Processo será realiazado em
-      Quality Gate teste de Sonar e Synk, ambos vai verificar bugs e vulnerabilidade em nosso codigo!'
+      slackSend message: 'Pipeline está no Estagio de teste no codigo. O Processo será realiazado emQuality Gate teste de Sonar e Synk, ambos vai verificar bugs e vulnerabilidade em nosso codigo!'
 
 }
 }
@@ -104,8 +103,7 @@ pipeline {
         stage('Slack Notification(Finish)') {
             steps {
               steps {
-              slackSend message: 'Pipelina foi finalizada, Se Houve algun problema no processo, foi enviado um email relatando oque houve!
-              Processo terminou'
+              slackSend message: 'Pipelina foi finalizada!'
 
                 }
             }
