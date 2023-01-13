@@ -15,14 +15,6 @@ pipeline {
 // Stages.
   stages {   
 
-        stage('Notification-Start') {
-            steps {
-              steps {
-              slackSend message: 'Pipeline Iniciada'
-                }
-            }
-        }
-
     stage('Clone repository') { 
       steps { 
         script{
@@ -44,6 +36,15 @@ pipeline {
 				}
 			}
   }
+
+   stage('Notification SLACK') {
+            steps {
+              steps {
+              slackSend message: 'Inicio Execuçao da InfraEstrura Na AWS'
+                }
+            }
+        }
+
 
 ///INFRA iS CODE 
     stage('TF INICIAR') {
