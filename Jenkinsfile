@@ -21,7 +21,6 @@ pipeline {
 
 }
 }
-}
 
     stage('Clone repository') { 
       steps { 
