@@ -31,17 +31,6 @@ pipeline {
              } 
     }
 
-
-    stage('Notification-Test-Unit-Security') {
-            steps {
-              steps {
-                
-              slackSend message: 'Inicio teste Software e Segurança'
-                }
-            }
-        }
-
-
    ///Qualite gate
     stage('SonarCloud-GateCode-Quality') {
             steps {	
@@ -55,15 +44,6 @@ pipeline {
 				}
 			}
   }
-
-   stage('Notification-IAAS') {
-            steps {
-              steps {
-              slackSend message: 'Inicio Execuçao da Infra-Estrutura Na AWS'
-                }
-            }
-        }
-
 
 ///INFRA iS CODE 
     stage('TF INICIAR') {
