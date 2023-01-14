@@ -7,9 +7,6 @@ pipeline {
         terraform 'Terraform 1.3.7' 
     }
         environment {
-        // test variable: 0=success, 1=fail; must be string
-        doError = '0'
-        BUILD_USER = ''
         //aws
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
@@ -76,9 +73,9 @@ pipeline {
             }
         }
 
-        stage('TF Appove') {
+        stage('TF destroy') {
             steps {
-          sh 'terraform apply -auto-approve'
+          sh 'terraform destroy -auto-approve'
             }
         }
         }
