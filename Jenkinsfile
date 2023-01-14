@@ -22,13 +22,14 @@ pipeline {
 }
 }
 
-    stage('Clone repository') { 
-      steps { 
-        script{
-          checkout scm
-            }
-             } 
-    }
+  
+stage('GIT CLONE') {
+  steps {
+                // Get code from a GitHub repository
+    git url: 'https://github.com/BrunoSantos88/-TechDay--Jenkins-Servidor-CI-CD.git', branch: 'main',
+    credentialsId: 'jenkins-server_local'
+          }
+  }
 
   stage('Slack Notification(test unit code and vulnerability)') {
     steps {
@@ -37,26 +38,26 @@ pipeline {
 }
 }
  
-   ///Qualite gate
-   // stage('SonarCloud-GateCode-Quality') {
-    //        steps {	
-		//sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=fc8f04f3543d8b4d9217a0b20fe72a02521694aa'
-	//		}
-  //      } 
-  //  stage('Synk-GateSonar-Security') {
-   //         steps {		
-	//			withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-	//				sh 'mvn snyk:test -fn'
-	//			}
-	//		}
- // }
+   Qualite gate
+   stage('SonarCloud-GateCode-Quality') {
+            steps {	
+		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=fc8f04f3543d8b4d9217a0b20fe72a02521694aa'
+		}
+       } 
+    stage('Synk-GateSonar-Security') {
+           steps {		
+			withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
+					sh 'mvn snyk:test -fn'
+				}
+			}
+  }
 
- //  stage('Slack Notification(Terraform Start Process)') {
- //           steps {
- //             slackSend message: 'Agora está iniciando processo de construção da infra-estrutura da AWS. O commando "terraform fmt" , vai atualizar somente oque foi alterado ou adicionado ao projeto!'
- //               }
-  //          }
-///
+   stage('Slack Notification(Terraform Start Process)') {
+            steps {
+              slackSend message: 'Agora está iniciando processo de construção da infra-estrutura da AWS. O commando "terraform fmt" , vai atualizar somente oque foi alterado ou adicionado ao projeto!'
+                }
+          }
+
 
 ///INFRA iS CODE 
     stage('TF INICIAR') {
