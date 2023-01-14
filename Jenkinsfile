@@ -38,7 +38,7 @@ stage('GIT CLONE') {
 }
 }
  
-   Qualite gate
+   //Qualite Gate
    stage('SonarCloud-GateCode-Quality') {
             steps {	
 		sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=fc8f04f3543d8b4d9217a0b20fe72a02521694aa'
