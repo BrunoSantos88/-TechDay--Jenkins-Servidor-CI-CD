@@ -31,29 +31,3 @@ resource "aws_instance" "jks" {
 
  user_data = filebase64("Scripts/jenkis-amz.sh")  ##SHELLSCRIPT
 }
-
-
-  data "aws_ebs_snapshot" "ebs_volume" {
-      most_recent = true
-      owners      = ["self"]
-      filter {
-        name   = "tag:Name"
-        values = ["poc"]
-      }
-    }
-
-    resource "aws_volume_attachment" "this" {
-      device_name = "/dev/xvda"
-      volume_id   = aws_ebs_volume.myvol.id
-      instance_id = aws_instance.aipsampleinstance.id
-    }
-
-    resource "aws_ebs_volume" "myvol" {
-      availability_zone = "us-east-2c"
-      size              = 50
-      snapshot_id       = data.aws_ebs_snapshot.ebs_volume.id
-      tags = {
-        "Name" = "poc"
-      }
-
-    }
