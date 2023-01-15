@@ -7,7 +7,6 @@ resource "aws_volume_attachment" "ebs_att" {
 resource "aws_ebs_volume" "example" {
   availability_zone = "us-east-1"
   size              = 50
-  delete_on_termination = true
 }
 
 resource "aws_ebs_snapshot" "example_snapshot" {
