@@ -1,4 +1,5 @@
 resource "aws_ebs_volume" "volume" {
+    availability_zone = aws_instance.jks.availability_zone
     size = 50
     tags = {
         Name = "jenkis_server*volume"
