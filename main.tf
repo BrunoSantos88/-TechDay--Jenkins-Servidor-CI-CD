@@ -3,6 +3,6 @@
 #}
 
 module "kubernet" {
-  source ="./Kubenetes "
+  source ="./Kubenetes"
   
 }
