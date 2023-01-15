@@ -1,18 +1,14 @@
-resource "aws_volume_attachment" "ebs_att" {
-  device_name = "Jenkisvolume"
-  volume_id   = aws_ebs_volume.example.id
+resource "aws_ebs_volume" "volume" {
+    size = 50
+    tags = {
+        Name = "jenkis_server*volume"
+         }
+}
+
+
+resource "aws_volume_attachment" "ebs_att_task2" {
+  device_name = "*Jenkis*sever"
+  volume_id   = aws_ebs_volume.volume.id
   instance_id = aws_instance.jks.id
-}
 
-resource "aws_ebs_volume" "example" {
-  availability_zone = "us-east-1"
-  size              = 50
-}
-
-resource "aws_ebs_snapshot" "example_snapshot" {
-  volume_id = aws_ebs_volume.example.id
-
-  tags = {
-    Name = "HelloWorld_snap"
   }
-}
