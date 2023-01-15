@@ -1,6 +1,6 @@
-resource "aws_security_group" "monitoramento-sg" {
-  name = "monitoramento-sec-grup"
-  vpc_id = "vpc-0291871180d7d9fad"
+resource "aws_security_group" "sg-networking" {
+  name = "jks-sec-grup"
+  vpc_id = aws_vpc.networking.id
   
   ingress {
     from_port   = "8080"
