@@ -11,17 +11,6 @@ resource "aws_instance" "jks" {
    aws_security_group.jks-sg.id
   ]
 
-  root_block_device {
-    delete_on_termination = true
-    volume_size           = 50  #SSD
-    volume_type           = "gp2"
-
-
-    tags = {
-      Name = "jenkis_Sever"
-    }
-  }
-
   tags = {
     Name        = "jenkins*Server"
     Environment = "Treinamento"

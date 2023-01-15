@@ -67,3 +67,6 @@ sudo chown -R jenkins:jenkins /opt/sonar-scanner
 Sudo echo 'export PATH=$PATH:/opt/sonar-scanner/bin' | sudo tee -a /etc/profile
 Sudo curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
 sudo yum install nodejs -y
+
+
+#Monitoramento
