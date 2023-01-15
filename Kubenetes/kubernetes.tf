@@ -1,5 +1,5 @@
-resource "aws_instance" "kubernetes*Srver" {
-  ami                         = "ami-0b93ce03dcbcb10f6"  #mazonlinuz2
+resource "aws_instance" "kubernetesServer" {
+  ami                         = "ami-0b93ce03dcbcb10f6"  #ubuntu 20:04
   instance_type               = var.k8s_instance_type  #T2 LARGE
   availability_zone           = "us-east-1a"
   subnet_id                   = aws_subnet.eks_subnet_public_1a.id
