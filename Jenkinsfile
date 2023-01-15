@@ -44,13 +44,13 @@ stage('GIT CLONE') {
 		//sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=-TechDay--Jenkins-Servidor-CI-CD -Dsonar.organization=brunosantos881388 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=fc8f04f3543d8b4d9217a0b20fe72a02521694aa'
 		//}
      //  } 
-    stage('Synk-GateSonar-Security') {
-           steps {		
-			withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-					sh 'mvn snyk:test -fn'
-				}
-			}
-  }
+    //stage('Synk-GateSonar-Security') {
+    //       steps {		
+		//	withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
+		//			sh 'mvn snyk:test -fn'
+		///		}
+		//	}
+  //}
 
    stage('Slack Notification(Terraform Start Process)') {
             steps {
@@ -74,9 +74,9 @@ stage('GIT CLONE') {
             }
         }
 
-        stage('TF Destroy') {
+        stage('TF Apply') {
             steps {
-          sh 'terraform destroy -auto-approve'
+          sh 'terraform apply -auto-approve'
             }
         }
         }
