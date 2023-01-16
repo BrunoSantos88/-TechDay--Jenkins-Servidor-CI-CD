@@ -92,5 +92,8 @@ stage('GIT CLONE') {
 
         }
       }
+
+      
+  }
 }
-}
+
