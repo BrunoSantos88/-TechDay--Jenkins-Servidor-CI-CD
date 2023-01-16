@@ -62,17 +62,30 @@ stage('GIT CLONE') {
  
 
 
-     stage('Kubernetes Deployment Promethes') {
-	   steps {
-	      withKubeConfig([credentialsId: 'kubelogin']) {
-		  sh ('kubectl create namespace prometheus')
-      sh ('helm repo add prometheus-community https://prometheus-community.github.io/helm-charts')
-      sh ('helm upgrade -i prometheus prometheus-community/prometheus -namespace prometheus --set alertmanager.persistentVolume.storageClass="gp2",server.persistentVolume.storageClass="gp2"')
-      sh ('kubectl --namespace=prometheus port-forward deploy/prometheus-server 9090')
-		}
-	      }
-   	}
+     //stage('Kubernetes Deployment Promethes') {
+	  // steps {
+	   //   withKubeConfig([credentialsId: 'kubelogin']) {
+		 // sh ('kubectl create namespace prometheus')
+		//}
+	  //    }
+   //	}
 
+stage ('Aguardar 180s Depuração do OWSZAP'){
+	   steps {
+		   sh 'pwd; sleep 180; echo "Application Has been deployed on K8S"'
+	   	}
+	   }
+	   
+	stage('RunDASTUsingZAP') {
+          steps {
+		    withKubeConfig([credentialsId: 'kubelogin']) {
+				sh('zap.sh -cmd -quickurl http://$(kubectl get services/backend --namespace=developer -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
+				archiveArtifacts artifacts: 'zap_report.html'
+		    }
+	     }
+       } 
+  }
+}
 
 
 // Email Notification
@@ -94,7 +107,5 @@ stage('GIT CLONE') {
      //   }
     //  }
 
-      
-  }
-}
+
 
