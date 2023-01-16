@@ -65,7 +65,6 @@ stage('GIT CLONE') {
      stage('Kubernetes Deployment Promethes') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
-		  sh('kubectl delete all --all -n devsecops')
 		  sh ('kubectl apply -f -Prometheus-EKS/demonset.yaml --namespace=developer')
       sh ('kubectl apply -f -Prometheus-EKS/service.yaml --namespace=developer')
 		}
