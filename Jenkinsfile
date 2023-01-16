@@ -45,7 +45,7 @@ stage('GIT CLONE') {
                 
      //       }
      //   }
-/
+
      //   stage('TF FMT') {
        //     steps {
        //         sh 'terraform fmt'
@@ -72,7 +72,6 @@ stage('GIT CLONE') {
 	      }
    	}
 
-  }
 
 
 // Email Notification
@@ -93,4 +92,5 @@ stage('GIT CLONE') {
 
         }
       }
+}
 }
