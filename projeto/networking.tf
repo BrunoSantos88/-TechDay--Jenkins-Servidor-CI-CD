@@ -34,13 +34,31 @@ resource "aws_subnet" "subnet_public_1b" {
 
 }
 
-resource "aws_route_table_association" "jks_public_rt_association_1a" {
-  subnet_id      = aws_subnet.subnet_public_1a.id
+
+resource "aws_subnet" "subnet_public_1c" {
+  vpc_id                  = aws_vpc.networking.id
+  cidr_block              = "172.0.3.0/24"
+  availability_zone       = "us-east-1c"
+  map_public_ip_on_launch = true
+
+  tags = {
+    Name = "networking-c"
+  }
+
+}
+
+resource "aws_route_table_association" "jks_public_rt_association_1c" {
+  subnet_id      = aws_subnet.subnet_public_1c.id
   route_table_id = aws_route_table.public_rt.id
 }
 
 resource "aws_route_table_association" "public_rt_association_1b" {
   subnet_id      = aws_subnet.subnet_public_1b.id
+  route_table_id = aws_route_table.public_rt.id
+}
+
+resource "aws_route_table_association" "public_rt_association_1a" {
+  subnet_id      = aws_subnet.subnet_public_1a.id
   route_table_id = aws_route_table.public_rt.id
 }
 

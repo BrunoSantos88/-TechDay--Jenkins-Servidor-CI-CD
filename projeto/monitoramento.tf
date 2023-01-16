@@ -1,7 +1,7 @@
 resource "aws_instance" "monitoramento" {
   ami                         = "ami-0b93ce03dcbcb10f6"  #ubuntu 20:04
   instance_type               = var.monitoring_instance_type  #T2 LARGE
-  availability_zone           = "us-east-1b"
+  availability_zone           = "us-east-1a"
   subnet_id                   = aws_subnet.subnet_public_1b.id
   associate_public_ip_address = true
   key_name                    = "minhaaws"  #CHAVE SSH

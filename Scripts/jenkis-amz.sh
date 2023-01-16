@@ -21,10 +21,10 @@ sudo unzip awscliv2.zip
 sudo ./aws/install
 
 #ZAP is isntalled at /home/ec2-user/ZAP_2.11.1/zap.sh
+sudo apt-get install wget -y
 sudo wget https://github.com/zaproxy/zaproxy/releases/download/v2.11.1/ZAP_2_11_1_unix.sh
 sudo chmod +x ZAP_2_11_1_unix.sh 
 sudo ./ZAP_2_11_1_unix.sh -q
-sudo tar -xvf ZAP_2.11.1_Linux.tar.gz
 
 #kubectl
 curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.23.7/2022-06-29/bin/linux/amd64/kubectl

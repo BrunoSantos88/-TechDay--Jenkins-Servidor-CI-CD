@@ -1,3 +1,3 @@
 module "projetodevops" {
-source       = "./ProjetoJskinsSonar"
+source       = "./projeto"
 }

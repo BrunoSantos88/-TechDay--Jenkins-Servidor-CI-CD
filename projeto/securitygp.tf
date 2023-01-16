@@ -24,6 +24,20 @@ resource "aws_security_group" "sg-networking" {
   }
 
   ingress {
+    from_port   = "3000"
+    to_port     = "3000"
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = "9100"
+    to_port     = "9100"
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
     from_port   = "3306"
     to_port     = "3306"
     protocol    = "tcp"
@@ -36,6 +50,14 @@ resource "aws_security_group" "sg-networking" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+    ingress {
+    from_port   = "80"
+    to_port     = "80"
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
 
   ingress {
     from_port   = "22"
