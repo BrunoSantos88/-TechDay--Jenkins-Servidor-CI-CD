@@ -37,56 +37,37 @@ stage('GIT CLONE') {
                 }
           }
 
-
-///INFRA iS CODE 
- //   stage('TF INICIAR') {
-      //      steps {
-     //           sh 'terraform init -reconfigure'
+//INFRA iS CODE 
+    stage('TF INICIAR') {
+          steps {
+              sh 'terraform init -reconfigure'
                 
-     //       }
-     //   }
+           }
+        }
 
-     //   stage('TF FMT') {
-       //     steps {
-       //         sh 'terraform fmt'
+       stage('TF FMT') {
+           steps {
+               sh 'terraform fmt'
                 
-       //     }
-       // }
+            }
+       }
 
-       // stage('TF Apply') {
-       //     steps {
-      //    sh 'terraform apply -auto-approve'
-       //     }
-      //}
-      //  }
+       stage('TF Destroy') {
+           steps {
+         sh 'terraform destroy -auto-approve'
+           }
+    }
+        }
  
 
 
      //stage('Kubernetes Deployment Promethes') {
-	  // steps {
-	   //   withKubeConfig([credentialsId: 'kubelogin']) {
-		 // sh ('kubectl create namespace prometheus')
+	   //steps {
+	     // withKubeConfig([credentialsId: 'kubelogin']) {
+		  //sh ('kubectl create namespace prometheus')
 		//}
-	  //    }
+	    //  }
    //	}
-
-stage ('Aguardar 180s Instalar OWSZAP'){
-	   steps {
-		   sh 'pwd; sleep 180; echo "Application Has been deployed on K8S"'
-	   	}
-	   }
-	   
-stage('OWSZAP Frontend') {
-    steps {
-		withKubeConfig([credentialsId: 'kubelogin']) {
-		sh('zap.sh -cmd -quickurl http://$(kubectl get services/frontend --namespace=developer -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
-	  archiveArtifacts artifacts: 'zap_report.html'
-		}
-	  }
-    } 
-
-  }
-}
 
 
 // Email Notification
