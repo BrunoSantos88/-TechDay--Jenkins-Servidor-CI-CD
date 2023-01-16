@@ -3,6 +3,6 @@
 //}
 
 module "ecr" {
-sorce    = "./ecr" 
+source    = "./ecr" 
 
 }
