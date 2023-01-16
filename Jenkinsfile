@@ -65,8 +65,9 @@ stage('GIT CLONE') {
      stage('Kubernetes Deployment Promethes') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
-		  sh ('kubectl apply -f -Prometheus-EKS/demonset.yaml --namespace=developer')
-      sh ('kubectl apply -f -Prometheus-EKS/service.yaml --namespace=developer')
+      sh ('kubectl create namespace monitoring')
+		  sh ('kubectl apply -f -Prometheus-EKS/demonset.yaml --namespace=monitoring')
+      sh ('kubectl apply -f -Prometheus-EKS/service.yaml --namespace=monitoring')
 		}
 	      }
    	}
