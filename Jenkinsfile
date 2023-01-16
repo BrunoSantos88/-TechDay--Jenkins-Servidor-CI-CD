@@ -86,8 +86,7 @@ stage('GIT CLONE') {
      //           subject:"FAILURE: ${currentBuild.fullDisplayName}",
      //           body: "Pipeline Falhou , verificar os parametros corretos!"
 
-     //   }
-    //  }
-
+       }
+  
 
 
