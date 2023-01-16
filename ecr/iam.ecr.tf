@@ -1,5 +1,5 @@
-resource "aws_ecr_repository_policy" "frontend-repo-policy" {
-  repository = aws_ecr_repository.foo.name
+resource "aws_ecr_repository_policy" "frontend" {
+  repository = aws_ecr_repository.foo.id
   policy     = <<EOF
   {
     "Version": "2008-10-17",
