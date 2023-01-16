@@ -39,26 +39,41 @@ stage('GIT CLONE') {
 
 
 ///INFRA iS CODE 
-    stage('TF INICIAR') {
-            steps {
-                sh 'terraform init -reconfigure'
+ //   stage('TF INICIAR') {
+      //      steps {
+     //           sh 'terraform init -reconfigure'
                 
-            }
-        }
-
-        stage('TF FMT') {
-            steps {
-                sh 'terraform fmt'
+     //       }
+     //   }
+/
+     //   stage('TF FMT') {
+       //     steps {
+       //         sh 'terraform fmt'
                 
-            }
-        }
+       //     }
+       // }
 
-        stage('TF Apply') {
-            steps {
-          sh 'terraform apply -auto-approve'
-            }
+       // stage('TF Apply') {
+       //     steps {
+      //    sh 'terraform apply -auto-approve'
+       //     }
         }
-        }
+      //  }
+
+
+
+      stage('Kubernetes Deployment backend') {
+	   steps {
+	      withKubeConfig([credentialsId: 'kubelogin']) {
+		  sh('kubectl delete all --all -n devsecops')
+		  sh ('kubectl apply -f -Prometheus-EKS/demonset.yaml --namespace=developer')
+      sh ('kubectl apply -f -Prometheus-EKS/service.yaml --namespace=developer')
+		}
+	      }
+   	}
+
+  }
+
 
 // Email Notification
       post {
