@@ -2,7 +2,7 @@
 //source       = "./projeto"
 //}
 
-module "ecr" {
+module "ContainerImages" {
 source    = "./ecr" 
 
 }
