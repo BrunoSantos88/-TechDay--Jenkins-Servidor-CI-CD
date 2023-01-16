@@ -57,12 +57,12 @@ stage('GIT CLONE') {
        //     steps {
       //    sh 'terraform apply -auto-approve'
        //     }
-        }
+      //}
       //  }
+ 
 
 
-
-      stage('Kubernetes Deployment backend') {
+     stage('Kubernetes Deployment Promethes') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
 		  sh('kubectl delete all --all -n devsecops')
