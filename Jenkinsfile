@@ -65,8 +65,10 @@ stage('GIT CLONE') {
      stage('Kubernetes Deployment Promethes') {
 	   steps {
 	      withKubeConfig([credentialsId: 'kubelogin']) {
-		  sh ('kubectl apply -f -Prometheus-EKS/demonset.yaml --namespace=monitoring')
-      sh ('kubectl apply -f -Prometheus-EKS/service.yaml --namespace=monitoring')
+		  sh ('kubectl create namespace prometheus')
+      sh ('helm repo add prometheus-community https://prometheus-community.github.io/helm-charts')
+      sh ('helm upgrade -i prometheus prometheus-community/prometheus -namespace prometheus --set alertmanager.persistentVolume.storageClass="gp2",server.persistentVolume.storageClass="gp2"')
+      sh ('kubectl --namespace=prometheus port-forward deploy/prometheus-server 9090')
 		}
 	      }
    	}
