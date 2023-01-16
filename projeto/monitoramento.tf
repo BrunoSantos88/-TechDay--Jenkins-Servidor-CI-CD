@@ -29,5 +29,5 @@ resource "aws_instance" "monitoramento" {
     Managed     = "IAC"
   }
 
- user_data = filebase64("monitoramento/monitoramento.sh")  ##SHELLSCRIPT
+ user_data = filebase64("Scripts/monitoramento.sh")  ##SHELLSCRIPT
 }
