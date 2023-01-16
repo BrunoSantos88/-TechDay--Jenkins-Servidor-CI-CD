@@ -6,10 +6,7 @@ sudo echo "deb https://packages.grafana.com/enterprise/deb stable main" | sudo t
 sudo apt-get update
 sudo apt-get install grafana-enterprise -y
 sudo systemctl start grafana-server
-sudo systemctl status grafana-server 
-sudo netstat -atunp | grep 3000
-
 ##Prometheus
 sudo apt-get update
 sudo apt-get install prometheus -y
-sudo netstat -atunp | grep 9090
+sudo systemctl start prometheus
