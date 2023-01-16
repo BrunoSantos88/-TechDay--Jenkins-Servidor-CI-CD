@@ -70,20 +70,30 @@ stage('GIT CLONE') {
 	  //    }
    //	}
 
-stage ('Aguardar 180s Depuração do OWSZAP'){
+stage ('Aguardar 180s Instalar OWSZAP'){
 	   steps {
 		   sh 'pwd; sleep 180; echo "Application Has been deployed on K8S"'
 	   	}
 	   }
 	   
-	stage('RunDASTUsingZAP') {
+	stage('OWSZAP BACKEND') {
           steps {
 		    withKubeConfig([credentialsId: 'kubelogin']) {
 				sh('zap.sh -cmd -quickurl http://$(kubectl get services/backend --namespace=developer -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
 				archiveArtifacts artifacts: 'zap_report.html'
-		    }
-	     }
-       } 
+		}
+	  }
+    } 
+
+stage('OWSZAP Frontend') {
+    steps {
+		withKubeConfig([credentialsId: 'kubelogin']) {
+		sh('zap.sh -cmd -quickurl http://$(kubectl get services/frontend --namespace=developer -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
+	  archiveArtifacts artifacts: 'zap_report.html'
+		}
+	  }
+    } 
+
   }
 }
 
