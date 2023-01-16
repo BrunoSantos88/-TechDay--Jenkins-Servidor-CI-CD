@@ -41,7 +41,7 @@ stage('GIT CLONE') {
 ///INFRA iS CODE 
     stage('TF INICIAR') {
             steps {
-                sh 'terraform init '
+                sh 'terraform init -recofigure '
                 
             }
         }
