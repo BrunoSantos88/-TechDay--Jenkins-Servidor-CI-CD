@@ -1,5 +1,5 @@
 # --- comput/variables.tf ---
-variable "monitoring_instance_type" {
+variable "jenks_instance_type" {
   type    = string
   default = "t2.large"
 }

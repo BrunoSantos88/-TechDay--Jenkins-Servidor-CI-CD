@@ -12,7 +12,7 @@ resource "aws_eks_node_group" "eks-pipeline" {
   }
 
   ami_type       = "AL2_x86_64"
-  instance_types = ["t3.large"]
+  instance_types = "t3.large"
   disk_size      = 50
 
 
