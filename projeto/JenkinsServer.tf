@@ -5,7 +5,6 @@ resource "aws_instance" "jks" {
   subnet_id                   = aws_subnet.subnet_public_1a.id
   associate_public_ip_address = true
   key_name                    = "minhaaws"  #CHAVE SSH
-  iam_instance_profile = "${aws_iam_instance_profile.test_profile.name}"
 
 
   vpc_security_group_ids = [    ## portas 80, 8081, 22
