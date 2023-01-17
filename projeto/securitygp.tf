@@ -9,10 +9,19 @@ resource "aws_security_group" "sg-networking" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+
+####datadog TCP
    ingress {
     from_port   = "8125"
     to_port     = "8125"
     protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+## datadog UDP
+  ingress {
+    from_port   = "8125"
+    to_port     = "8125"
+    protocol    = "udp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 

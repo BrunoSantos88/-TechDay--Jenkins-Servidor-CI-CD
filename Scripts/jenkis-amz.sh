@@ -63,3 +63,9 @@ sudo chown -R jenkins:jenkins /opt/sonar-scanner
 Sudo echo 'export PATH=$PATH:/opt/sonar-scanner/bin' | sudo tee -a /etc/profile
 Sudo curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash -
 sudo yum install nodejs -y
+
+
+#datadogAgente
+
+sudo DD_API_KEY=dbd1f53ed0e22eb73454b59608d40690 DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+sudo systemctl start datadog-agent
