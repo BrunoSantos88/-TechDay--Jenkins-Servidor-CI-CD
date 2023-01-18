@@ -2,7 +2,7 @@
 //source       = "./projeto"
 //}
 
-module "helmprojeto" {
+module "helmjenkins" {
 source    = "./helmprojeto" 
 
 }
