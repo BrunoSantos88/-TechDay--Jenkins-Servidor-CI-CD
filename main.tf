@@ -1,8 +1,8 @@
-module "projetodevops" {
-source       = "./projeto"
-}
-
-//module "ContainerImages" {
-//source    = "./ecr" 
-
+//module "projetodevops" {
+//source       = "./projeto"
 //}
+
+module "helmprojeto" {
+source    = "./helmprojeto" 
+
+}
