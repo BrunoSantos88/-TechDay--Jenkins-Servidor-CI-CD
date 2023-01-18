@@ -40,7 +40,7 @@ stage('GIT CLONE') {
 //INFRA iS CODE 
     stage('TF Upgarde') {
           steps {
-              sh 'terraform init -upgrade 4.21.0'
+              sh 'terraform -upgrade 4.21.0'
                 
            }
         }
