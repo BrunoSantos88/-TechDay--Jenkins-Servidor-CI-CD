@@ -1,5 +1,5 @@
 resource "aws_vpc" "networking" {
-  cidr_block            = "172.0.0.0/16"
+  cidr_block            = "10.0.0.0/16"
 
   enable_dns_hostnames  = true
   enable_dns_support    = true
@@ -9,86 +9,164 @@ resource "aws_vpc" "networking" {
   }
 }
 
-resource "aws_subnet" "subnet_public_1a" {
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.networking.id
 
+  tags = {
+    Name = "igw"
+  }
+}
+
+####REDE subnetes privadas e pubblicas.
+
+resource "aws_subnet" "private-us-east-1a" {
+  vpc_id            = aws_vpc.networking.id
+  cidr_block        = "10.0.0.0/19"
+  availability_zone = "us-east-1a"
+
+  tags = {
+    "Name"                            = "private-us-east-1a"
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/cluster/demo"      = "owned"
+  }
+}
+
+resource "aws_subnet" "private-us-east-1b" {
+  vpc_id            = aws_vpc.networking.id
+  cidr_block        = "10.0.32.0/19"
+  availability_zone = "us-east-1b"
+
+  tags = {
+    "Name"                            = "private-us-east-1b"
+    "kubernetes.io/role/internal-elb" = "1"
+    "kubernetes.io/cluster/demo"      = "owned"
+  }
+}
+
+resource "aws_subnet" "public-us-east-1a" {
   vpc_id                  = aws_vpc.networking.id
-  cidr_block              = "172.0.1.0/24"
+  cidr_block              = "10.0.64.0/19"
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "networking-a"
+    "Name"                       = "public-us-east-1a"
+    "kubernetes.io/role/elb"     = "1"
+    "kubernetes.io/cluster/demo" = "owned"
   }
-
 }
 
-resource "aws_subnet" "subnet_public_1b" {
+resource "aws_subnet" "public-us-east-1b" {
   vpc_id                  = aws_vpc.networking.id
-  cidr_block              = "172.0.2.0/24"
+  cidr_block              = "10.0.96.0/19"
   availability_zone       = "us-east-1b"
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "networking-b"
+    "Name"                       = "public-us-east-1b"
+    "kubernetes.io/role/elb"     = "1"
+    "kubernetes.io/cluster/demo" = "owned"
   }
-
 }
 
 
-resource "aws_subnet" "subnet_public_1c" {
-  vpc_id                  = aws_vpc.networking.id
-  cidr_block              = "172.0.3.0/24"
-  availability_zone       = "us-east-1c"
-  map_public_ip_on_launch = true
+resource "aws_eip" "nat" {
+  vpc = true
 
   tags = {
-    Name = "networking-c"
+    Name = "nat"
+  }
+}
+
+resource "aws_nat_gateway" "nat" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.public-us-east-1a.id
+
+  tags = {
+    Name = "nat"
   }
 
+  depends_on = [aws_internet_gateway.igw]
 }
 
-resource "aws_route_table_association" "jks_public_rt_association_1c" {
-  subnet_id      = aws_subnet.subnet_public_1c.id
-  route_table_id = aws_route_table.public_rt.id
-}
 
-resource "aws_route_table_association" "public_rt_association_1b" {
-  subnet_id      = aws_subnet.subnet_public_1b.id
-  route_table_id = aws_route_table.public_rt.id
-}
-
-resource "aws_route_table_association" "public_rt_association_1a" {
-  subnet_id      = aws_subnet.subnet_public_1a.id
-  route_table_id = aws_route_table.public_rt.id
-}
-
-resource "aws_internet_gateway" "networking_ig" {
+#Roteamento
+resource "aws_route_table" "private" {
   vpc_id = aws_vpc.networking.id
 
-  tags = {
-    Name = "networking-igw"
-  }
+  route = [
+    {
+      cidr_block                 = "0.0.0.0/0"
+      nat_gateway_id             = aws_nat_gateway.nat.id
+      carrier_gateway_id         = ""
+      destination_prefix_list_id = ""
+      egress_only_gateway_id     = ""
+      gateway_id                 = ""
+      instance_id                = ""
+      ipv6_cidr_block            = ""
+      local_gateway_id           = ""
+      network_interface_id       = ""
+      transit_gateway_id         = ""
+      vpc_endpoint_id            = ""
+      vpc_peering_connection_id  = ""
+    },
+  ]
 
+  tags = {
+    Name = "private"
+  }
 }
 
-resource "aws_route_table" "public_rt" {
+resource "aws_route_table" "public" {
   vpc_id = aws_vpc.networking.id
 
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.networking_ig.id
-  }
+  route = [
+    {
+      cidr_block                 = "0.0.0.0/0"
+      gateway_id                 = aws_internet_gateway.igw.id
+      nat_gateway_id             = ""
+      carrier_gateway_id         = ""
+      destination_prefix_list_id = ""
+      egress_only_gateway_id     = ""
+      instance_id                = ""
+      ipv6_cidr_block            = ""
+      local_gateway_id           = ""
+      network_interface_id       = ""
+      transit_gateway_id         = ""
+      vpc_endpoint_id            = ""
+      vpc_peering_connection_id  = ""
+    },
+  ]
 
   tags = {
-    Name = "route-tables"
+    Name = "public"
   }
+}
 
+resource "aws_route_table_association" "private-us-east-1a" {
+  subnet_id      = aws_subnet.private-us-east-1a.id
+  route_table_id = aws_route_table.private.id
+}
+
+resource "aws_route_table_association" "private-us-east-1b" {
+  subnet_id      = aws_subnet.private-us-east-1b.id
+  route_table_id = aws_route_table.private.id
+}
+
+resource "aws_route_table_association" "public-us-east-1a" {
+  subnet_id      = aws_subnet.public-us-east-1a.id
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_route_table_association" "public-us-east-1b" {
+  subnet_id      = aws_subnet.public-us-east-1b.id
+  route_table_id = aws_route_table.public.id
 }
 
 ###REDE BANCO DE DADOS
 resource "aws_db_subnet_group" "networkinsdb" {
   name       = "group-subenets-publicas"
-  subnet_ids = [aws_subnet.subnet_public_1b.id,aws_subnet.subnet_public_1a.id,aws_subnet.subnet_public_1a.id]
+  subnet_ids = [aws_subnet.public-us-east-1a.id]
 
   tags = {
     Name        = "REDE-SUBNETS"
