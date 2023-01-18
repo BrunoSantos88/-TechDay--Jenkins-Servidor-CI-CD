@@ -28,17 +28,13 @@ Desafio 1: Subir jenkins para aws. nesse caso, usei um jenkins na minha maquina 
 repositorio usando raiz. Link https://github.com/BrunoSantos88/-TechDay--Jenkins-Servidor-CI-CD.git
 
 <img align="left" alt="Rafa-Js" height="200" width="200" src="https://user-images.githubusercontent.com/91704169/211863070-1e635ce1-06d5-4f06-899b-79eb8be1acd9.png" />
-</p>
-
-
-Desafio 2: Criar observabilidade no Datadog referente ao Jenkins. </p>
-<img align="left" alt="Rafa-Js" height="200" width="200" src="https://user-images.githubusercontent.com/91704169/213305127-3459eec4-9a68-4063-adb3-24815237ae1c.png" /> 
+<img align="center" alt="Rafa-Js" height="200" width="200" src="https://user-images.githubusercontent.com/91704169/213305127-3459eec4-9a68-4063-adb3-24815237ae1c.png" /> 
 ______________________________________________________________________________________________________________________________________________
 
 💌 Entre em contato comigo :) // contact me ⤵
 </p>
 
-<p align="center">
+<p align="left">
   <a href="mailto:brunosantosc1@gmail.com" alt="Gmail">
   <img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
   <a href="https://www.linkedin.com/in/brunosantos88" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
