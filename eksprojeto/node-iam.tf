@@ -1,4 +1,4 @@
-resource "aws_iam_role" "example" {
+resource "aws_iam_role" "nodeexample" {
   name = "eks-node-group-example"
 
   assume_role_policy = jsonencode({
@@ -20,10 +20,10 @@ resource "aws_iam_role_policy_attachment" "example-AmazonEKSWorkerNodePolicy" {
 
 resource "aws_iam_role_policy_attachment" "example-AmazonEKS_CNI_Policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role       = aws_iam_role.example.name
+  role       = aws_iam_role.nodeexample.name
 }
 
 resource "aws_iam_role_policy_attachment" "example-AmazonEC2ContainerRegistryReadOnly" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role       = aws_iam_role.example.name
+  role       = aws_iam_role.nodeexample.name
 }
