@@ -52,7 +52,7 @@ stage('GIT CLONE') {
             }
        }
 
-       stage('TF apply') {
+       stage('TF Apply') {
            steps {
          sh 'terraform apply -auto-approve'
            }
