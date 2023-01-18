@@ -2,7 +2,6 @@ terraform {
   required_providers {
     aws = {
         version = "1.3.7"
-        region = "us-east-1"
     }
     helm = {
         version = "2.6.0"
@@ -24,4 +23,15 @@ provider "helm" {
                 command     = "aws"
             }
     }
+}
+
+provider "kubernetes" {
+    host                   = data.aws_eks_cluster.dev-cluster.endpoint
+    cluster_ca_certificate = base64decode(data.aws_eks_cluster.dev-cluster.certificate_authority.0.data)
+    token                  = data.aws_eks_cluster_auth.dev-cluster.token
+    #load_config_file       = false
+}
+
+provider "aws" {
+    region = var.aws_region
 }
