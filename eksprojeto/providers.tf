@@ -1,12 +1,16 @@
 terraform {
-  required_version = "1.3.7"
-}
+  required_providers {
+    terraform = {
+        version = "1.3.7"
+    }
     helm = {
         version = "2.6.0"
     }
     kubernetes = {
         version = "2.12.1"
     }
+  }
+}
 
 provider "helm" {
     kubernetes {
