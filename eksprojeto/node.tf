@@ -10,13 +10,13 @@ resource "aws_eks_node_group" "example" {
     min_size     = 1
   }
 
+  update_config {
+    max_unavailable = 1
+  }
+
     eks_managed_node_group_defaults = {
     ami_type       = "AL2_x86_64"
     instance_types = ["t3.medium"]
-  }
-
-  update_config {
-    max_unavailable = 1
   }
 
   # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
