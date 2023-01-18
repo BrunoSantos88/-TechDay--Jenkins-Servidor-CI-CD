@@ -27,8 +27,8 @@ ________________________________________________________________________________
 Desafio 1: Subir jenkins para aws. nesse caso, usei um jenkins na minha maquina local
 repositorio usando raiz. Link https://github.com/BrunoSantos88/-TechDay--Jenkins-Servidor-CI-CD.git
 
-<img align="center" alt="Rafa-Js" height="200" width="200" src="https://user-images.githubusercontent.com/91704169/211863070-1e635ce1-06d5-4f06-899b-79eb8be1acd9.png" />    
-
+<img align="left" alt="Rafa-Js" height="200" width="200" src="https://user-images.githubusercontent.com/91704169/211863070-1e635ce1-06d5-4f06-899b-79eb8be1acd9.png" />    
+<img align="center" alt="Rafa-Js" height="200" width="200" src="https://user-images.githubusercontent.com/91704169/211863070-1e635ce1-06d5-4f06-899b-79eb8be1acd9.png" /> 
 ______________________________________________________________________________________________________________________________________________
 
 💌 Entre em contato comigo :) // contact me ⤵
