@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-        version = "4.21.0"
+        version = "1.3.7"
     }
     helm = {
         version = "2.6.0"
@@ -10,7 +10,6 @@ terraform {
         version = "2.12.1"
     }
   }
-  required_version = "~> 1.3.7"
 }
 
 provider "helm" {
