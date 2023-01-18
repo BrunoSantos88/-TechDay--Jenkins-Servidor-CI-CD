@@ -42,7 +42,7 @@ stage('GIT CLONE') {
 
     stage('TF INICIAR') {
           steps {
-              sh 'terraform init -upgrade'
+              sh 'terraform init -reconfigure'
                 
            }
         }
