@@ -1,12 +1,11 @@
-module "eks" {
-  source  = "terraform-aws-modules/eks/aws"
-  version = "19.0.4"
-
+resource "aws_eks_cluster" "eks-server" {
   cluster_name    = "eks-server"
   cluster_version = "1.23"
 
+
+  vpc_config {
   vpc_id     = aws_vpc.networking.id
-  subnet_ids = aws_subnet.subnet_public_1a.id
+  subnet_ids = [aws_subnet.subnet_public_1a.id]
   cluster_endpoint_public_access = true
 
   eks_managed_node_group_defaults = {
@@ -35,4 +34,5 @@ module "eks" {
       desired_size = 1
     }
   }
+}
 }
