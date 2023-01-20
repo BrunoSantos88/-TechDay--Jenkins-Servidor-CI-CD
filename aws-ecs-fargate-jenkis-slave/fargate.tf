@@ -7,5 +7,3 @@ resource "aws_ecs_task_definition" "definition" {
   memory                   = "1024"
   requires_compatibilities = ["FARGATE"]
   }
-
-  
