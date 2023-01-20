@@ -37,29 +37,47 @@ stage('GIT CLONE') {
                 }
           }
 
+
+stage("run cloudFormation") {
+            steps {
+                script {
+                    withAWS(credentials:aws-credentials ) {
+                        cfnUpdate(
+                            stack: stackName,
+                            file: "networking.yaml",
+                            params: [
+                                "uniqString=${uniqString}"
+                            ],
+                            timeoutInMinutes: 10,
+                            pollInterval: 600
+                        )
+                    }
+                }
+            }
+        }
 //INFRA iS CODE
 
 
-    stage('TF INICIAR') {
-          steps {
-              sh 'terraform init -reconfigure'
-                
-           }
-        }
+    ///stage('TF INICIAR') {
+     ///     steps {
+      //        sh 'terraform init -reconfigure'
+               
+       //    }
+       // }
 
-       stage('TF FMT') {
-           steps {
-               sh 'terraform fmt'
+      /// stage('TF FMT') {
+       //    steps {
+       //        sh 'terraform fmt'
                 
-            }
-       }
+       //     }
+    //   }
 
-       stage('TF Destroy') {
-           steps {
-         sh 'terraform destroy -auto-approve'
-           }
-    }
-        }
+    //   stage('TF Destroy') {
+    //       steps {
+    //     sh 'terraform destroy -auto-approve'
+       //    }
+   // }
+    //    }
 
 
 //Email Notification
