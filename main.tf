@@ -12,7 +12,7 @@
 
 //}
 
-module "fargate" {
-source    = "./fargateprojeto" 
+module "fargate-jlve" {
+source    = "./aws-ecs-fargate-jenkis-slave" 
 
 }
