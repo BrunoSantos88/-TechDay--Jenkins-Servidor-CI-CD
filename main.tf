@@ -7,10 +7,10 @@
 
 //}
 
-module "eksbasic" {
-source    = "./eksprojeto" 
+//module "eksbasic" {
+//source    = "./eksprojeto" 
 
-}
+//}
 
 module "fargate" {
 source    = "./fargateprojeto" 
