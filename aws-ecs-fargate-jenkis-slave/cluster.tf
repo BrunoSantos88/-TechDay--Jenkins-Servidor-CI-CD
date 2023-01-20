@@ -1,5 +1,5 @@
-resource "aws_ecs_cluster" "jenkins-slave" {
-  name = "ping"
+resource "aws_ecs_cluster" "jenkslvn" {
+  name = "jenkins-slave"
 
   setting {
     name  = "containerInsights"
