@@ -1,7 +1,7 @@
-resource "aws_ecs_service" "service" {
-  name              = "service"
-  cluster           = aws_ecs_cluster.ping.id
-  task_definition   = aws_ecs_task_definition.task.id
+resource "aws_ecs_service" "jkslve" {
+  name              = "jsnkislv"
+  cluster           = aws_ecs_cluster.jenkslvn.id
+  task_definition   = aws_ecs_task_definition.jkstask.id
   desired_count     = 1
   launch_type       = "FARGATE"
   platform_version  = "LATEST"

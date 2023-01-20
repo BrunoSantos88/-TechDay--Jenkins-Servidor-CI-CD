@@ -1,5 +1,5 @@
-resource "aws_ecs_task_definition" "task" {
-  family                        = "service"
+resource "aws_ecs_task_definition" "jkstask" {
+  family                        = "jsslave"
   network_mode                  = "awsvpc"
   requires_compatibilities      = ["FARGATE", "EC2"]
   cpu                           = 512
