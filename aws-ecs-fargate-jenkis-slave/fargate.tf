@@ -1,9 +1,22 @@
-resource "aws_ecs_task_definition" "definition" {
-  family                   = "task_definition_name"
-  task_role_arn            = aws_iam_role.ecs_task_role.id
-  execution_role_arn       = aws_iam_role.ecs_task_execution_role.id
-  network_mode             = "awsvpc"
-  cpu                      = "256"
-  memory                   = "1024"
-  requires_compatibilities = ["FARGATE"]
-  }
+resource "aws_ecs_task_definition" "task" {
+  family                        = "service"
+  network_mode                  = "awsvpc"
+  requires_compatibilities      = ["FARGATE", "EC2"]
+  cpu                           = 512
+  memory                        = 2048
+  container_definitions         = jsonencode([
+    {
+      name      = "nginx-app"
+      image     = "nginx:latest"
+      cpu       = 512
+      memory    = 2048
+      essential = true  # if true and if fails, all other containers fail. Must have at least one essential
+      portMappings = [
+        {
+          containerPort = 80
+          hostPort      = 80
+        }
+      ]
+    }
+  ])
+}
