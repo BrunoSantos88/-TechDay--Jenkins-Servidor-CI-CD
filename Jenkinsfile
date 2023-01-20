@@ -37,65 +37,47 @@ stage('GIT CLONE') {
                 }
           }
 
-
-stage("run cloudFormation") {
-            steps {
-                script {
-                    withAWS(credentials:aws-credentials ) {
-                        cfnUpdate(
-                            stack: stackName,
-                            file: "networking.yaml",
-                            params: [
-                                "uniqString=${uniqString}"
-                            ],
-                            timeoutInMinutes: 10,
-                            pollInterval: 600
-                        )
-                    }
-                }
-            }
-        }
 //INFRA iS CODE
 
 
-    ///stage('TF INICIAR') {
-     ///     steps {
-      //        sh 'terraform init -reconfigure'
-               
-       //    }
-       // }
-
-      /// stage('TF FMT') {
-       //    steps {
-       //        sh 'terraform fmt'
+    stage('TF INICIAR') {
+          steps {
+              sh 'terraform init -reconfigure'
                 
-       //     }
-    //   }
+           }
+        }
 
-    //   stage('TF Destroy') {
-    //       steps {
-    //     sh 'terraform destroy -auto-approve'
-       //    }
-   // }
-    //    }
+       stage('TF FMT') {
+           steps {
+               sh 'terraform fmt'
+                
+            }
+       }
+
+       stage('TF APPLY') {
+           steps {
+         sh 'terraform apply -auto-approve'
+           }
+    }
+        }
 
 
 //Email Notification
-//      post {
-   //   always {
-    //     echo "Notifying build result by email"
-    //   }
-    //   success {
-    //       mail to: 'infratidevops@gmail.com',
-     //          subject: "SUCCESS: ${currentBuild.fullDisplayName}",
-      //        body: "Pipeline passou, Efetou com Sucesso"
+      post {
+      always {
+         echo "Notifying build result by email"
+       }
+       success {
+           mail to: 'infratidevops@gmail.com',
+               subject: "SUCCESS: ${currentBuild.fullDisplayName}",
+              body: "Pipeline passou, Efetou com Sucesso"
 
-      //  }
-      // failure {
-      //    mail to: 'infratidevops@gmail.com',
-       //        subject:"FAILURE: ${currentBuild.fullDisplayName}",
-        //       body: "Pipeline Falhou , verificar os parametros corretos!"
-     //  }
+        }
+       failure {
+          mail to: 'infratidevops@gmail.com',
+               subject:"FAILURE: ${currentBuild.fullDisplayName}",
+               body: "Pipeline Falhou , verificar os parametros corretos!"
+       }
        
       }
 }
