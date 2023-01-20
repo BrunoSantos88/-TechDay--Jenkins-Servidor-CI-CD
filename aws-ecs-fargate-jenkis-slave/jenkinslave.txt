@@ -1,0 +1,6 @@
+Links
+
+#criando apartir do jenkins
+https://www.nanoshots.com.br/2019/08/jenkins-escalando-jenkins-slaves-do-aws.html
+
+#basico terraform
