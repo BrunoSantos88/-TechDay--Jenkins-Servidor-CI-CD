@@ -11,3 +11,8 @@ module "eksbasic" {
 source    = "./eksprojeto" 
 
 }
+
+module "fargate" {
+source    = "./fargateprojeto" 
+
+}

@@ -1,0 +1,3 @@
+# commandos
+
+ iptables -t filter -A INPUT -m tcp -p tcp --dport 32061 -j ACCEPT
