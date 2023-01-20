@@ -1,4 +1,4 @@
-resource "aws_ecs_cluster" "ping" {
+resource "aws_ecs_cluster" "jenkins-slave" {
   name = "ping"
 
   setting {

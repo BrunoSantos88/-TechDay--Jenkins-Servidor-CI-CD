@@ -6,15 +6,15 @@ resource "aws_ecs_task_definition" "task" {
   memory                        = 2048
   container_definitions         = jsonencode([
     {
-      name      = "nginx-app"
-      image     = "nginx:latest"
+      name      = "jenkins-slave"
+      image     = "brunosantos88/jenkins-slave:latest"
       cpu       = 512
       memory    = 2048
       essential = true  # if true and if fails, all other containers fail. Must have at least one essential
       portMappings = [
         {
-          containerPort = 80
-          hostPort      = 80
+          containerPort = 8080
+          hostPort      = 8080
         }
       ]
     }
