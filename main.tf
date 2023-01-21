@@ -1,3 +1,6 @@
+module "networking" {
+source    = "./aws-networking" 
+}
 //module "projetodevops" {
 //source       = "./projeto"
 //}
@@ -17,8 +20,13 @@
 
 //}
 
-module "SonarRDS" {
-source    = "./aws-ecs-fargate-sonar-rds" 
+//module "Sonarque" {
+//source    = "./aws-ecs-fargate-sonar-rds" 
 
-}
+//}
+
+///module "bancodados" {
+//source    = "./aws-rds" 
+
+//}
 

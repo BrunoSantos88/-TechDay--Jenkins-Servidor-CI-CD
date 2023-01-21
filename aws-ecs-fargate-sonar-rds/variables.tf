@@ -33,8 +33,7 @@ variable "jenkinsServer" {
 }
 
 
-#networgin
-
+#networging
 variable "vpc" {
   type    = string
   default = "Jenkins*Server"

@@ -1,7 +1,7 @@
 # --- comput/variables.tf ---
-variable "jenks_instance_type" {
+variable "rds_instance_type" {
   type    = string
-  default = "t2.large"
+  default = "db.t3.micro"
 }
 
 variable "regions" {
@@ -14,27 +14,8 @@ variable "key" {
   type    = string
   default = "minhaaws"
 }
- ##Amazonlinux2 'us-east-1'
-variable "amazonlinux2" {
-  type    = string
-  default = "ami-0b93ce03dcbcb10f6"
-}
 
- ##ubuntu 'us-east-1'
-variable "ubuntu2004" {
-  type    = string
-  default = "ami-0b93ce03dcbcb10f6"
-}
-
-#Servidores
-variable "jenkinsServer" {
-  type    = string
-  default = "Jenkins*Server"
-}
-
-
-#networgin
-
+#networging
 variable "vpc" {
   type    = string
   default = "Jenkins*Server"
