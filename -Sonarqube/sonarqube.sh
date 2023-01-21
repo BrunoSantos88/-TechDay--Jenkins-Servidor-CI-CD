@@ -21,10 +21,8 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 EOT
-
 sudo service sonar start
 #instalar sonar scanner
-
 sudo wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
 sudo unzip sonar-scanner-cli-4.6.2.2472-linux.zip -d /opt/
 sudo mv /opt/sonar-scanner-cli-4.6.2.2472-linux /opt/sonar-scanner
