@@ -25,8 +25,8 @@ source    = "./aws-networking"
 
 //}
 
-module "bancodados" {
-source    = "./aws-rds" 
+//module "bancodados" {
+//source    = "./aws-rds" 
 
-}
+//}
 
