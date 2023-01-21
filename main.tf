@@ -1,6 +1,6 @@
-module "networking" {
-source    = "./aws-networking" 
-}
+//module "networking" {
+//source    = "./aws-networking" 
+//}
 //module "projetodevops" {
 //source       = "./projeto"
 //}
@@ -25,8 +25,8 @@ source    = "./aws-networking"
 
 //}
 
-///module "bancodados" {
-//source    = "./aws-rds" 
+module "bancodados" {
+source    = "./aws-rds" 
 
-//}
+}
 

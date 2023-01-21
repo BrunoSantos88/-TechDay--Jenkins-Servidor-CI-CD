@@ -4,15 +4,9 @@ variable "rds_instance_type" {
   default = "db.t3.micro"
 }
 
-variable "regions" {
+variable "region-a" {
   type    = string
   default = "us-east-1a"
-}
-
-###AMI
-variable "key" {
-  type    = string
-  default = "minhaaws"
 }
 
 #networging
@@ -21,22 +15,17 @@ variable "vpc" {
   default = "Jenkins*Server"
 }
 
-variable "subenet-a" {
+variable "subnet-grups" {
   type    = string
-  default = "Jenkins*Server"
+  default = "group-subenets-publicas"
 }
 
-variable "subenet-b" {
+variable "login" {
   type    = string
-  default = "Jenkins*Server"
+  default = "admin"
 }
 
-variable "subenet-c" {
+variable "senha" {
   type    = string
-  default = "Jenkins*Server"
-}
-
-variable "security" {
-  type    = string
-  default = "Jenkins*Server"
+  default = "sonarsonar"
 }
