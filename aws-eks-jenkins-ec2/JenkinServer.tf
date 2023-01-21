@@ -1,10 +1,10 @@
 resource "aws_instance" "jks" {
-  ami                         = "ami-0b93ce03dcbcb10f6"  #ubuntu:20?04
+  ami                         = var.amazonlinux2  #ubuntu:20?04
   instance_type               = var.jenks_instance_type  #T2 LARGE
-  availability_zone           = "us-east-1a"
+  availability_zone           = var.regions
   subnet_id                   = aws_subnet.subnet_public_1a.id
   associate_public_ip_address = true
-  key_name                    = "minhaaws"  #CHAVE SSH
+  key_name                    = var.key  #CHAVE SSH
 
 
   vpc_security_group_ids = [    ## portas 80, 8081, 22
@@ -18,7 +18,7 @@ resource "aws_instance" "jks" {
 
 
     tags = {
-      Name = "jenkis_Sever"
+      Name = var.jenkinsServer
     }
   }
 

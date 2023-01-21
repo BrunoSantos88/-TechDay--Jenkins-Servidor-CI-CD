@@ -12,7 +12,13 @@
 
 //}
 
-module "fargate-jlve" {
-source    = "./aws-ecs-fargate-jenkis-slave" 
+//module "fargate-jlve" {
+//source    = "./aws-ecs-fargate-jenkis-slave" 
+
+//}
+
+module "SonarRDS" {
+source    = "./aws-ecs-fargate-sonar-rds" 
 
 }
+
