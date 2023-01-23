@@ -6,7 +6,7 @@ variable "aws_cloudwatch_retention_in_days" {
 
 variable "app_name" {
   type        = string
-  description = "Application Name"
+  description = "jenkins"
 }
 
 variable "app_environment" {
@@ -16,7 +16,7 @@ variable "app_environment" {
 
 
 variable "availability_zones" {
-  description = "List of availability zones"
+  description = "us-east-1"
 }
 
 
