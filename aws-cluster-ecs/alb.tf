@@ -1,6 +1,6 @@
 resource "aws_lb" "default" {
   name            = "example-lb"
-  subnets         = aws_subnet.public.*.id
+  subnets         = [aws_subnet.subnet_public_1a.id,aws_subnet.subnet_public_1b.id,aws_subnet.subnet_public_1c.id]
   security_groups = [aws_security_group.lb.id]
 }
 
@@ -8,7 +8,7 @@ resource "aws_lb_target_group" "hello_world" {
   name        = "example-target-group"
   port        = 80
   protocol    = "HTTP"
-  vpc_id      = aws_vpc.default.id
+  vpc_id      = aws_vpc.networking.id
   target_type = "ip"
 }
 

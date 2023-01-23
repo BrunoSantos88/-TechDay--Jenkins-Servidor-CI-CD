@@ -11,7 +11,7 @@ resource "aws_ecs_service" "hello_world" {
 
   network_configuration {
     security_groups = [aws_security_group.hello_world_task.id]
-    subnets         = aws_subnet.private.*.id
+    subnets         = [aws_subnet.subnet_public_1a.id,aws_subnet.subnet_public_1b.id,aws_subnet.subnet_public_1c.id]
   }
 
   load_balancer {

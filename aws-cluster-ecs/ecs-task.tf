@@ -26,7 +26,7 @@ DEFINITION
 
 resource "aws_security_group" "hello_world_task" {
   name        = "example-task-security-group"
-  vpc_id      = aws_vpc.default.id
+  vpc_id      = aws_vpc.networking.id
 
   ingress {
     protocol        = "tcp"
