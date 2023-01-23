@@ -34,6 +34,15 @@ variable "jenkinsServer" {
 
 
 #networking
+variable "subenet_B_networking" {
+  type    = string
+  default = "subnet-0326d405ec5afeb52"
+}
+
+variable "security_networking" {
+  type    = string
+  default = "sg-0d04e09789726df49"
+}
 
 
 

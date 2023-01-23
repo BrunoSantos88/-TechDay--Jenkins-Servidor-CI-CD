@@ -10,3 +10,10 @@ module "networking" {
 //source    = "./aws-cluster-ecs" 
 //}
 
+
+module "networking" {
+source    = "./aws-eks-jenkins-ec2" 
+}
+
+
+
