@@ -1,6 +1,6 @@
-module "networking" {
-    source    = "./aws-networking" 
-  }
+///module "networking" {
+ //   source    = "./aws-networking" 
+ // }
 
   
 //module "projetodevops" {
@@ -13,7 +13,7 @@ module "networking" {
 //}
 
 
-module "networking" {
+module "aws-jenkins" {
 source    = "./aws-eks-jenkins-ec2" 
 }
 
