@@ -33,29 +33,7 @@ variable "jenkinsServer" {
 }
 
 
-#networgin
+#networking
 
-variable "vpc" {
-  type    = string
-  default = "Jenkins*Server"
-}
 
-variable "subenet-a" {
-  type    = string
-  default = "Jenkins*Server"
-}
 
-variable "subenet-b" {
-  type    = string
-  default = "Jenkins*Server"
-}
-
-variable "subenet-c" {
-  type    = string
-  default = "Jenkins*Server"
-}
-
-variable "security" {
-  type    = string
-  default = "Jenkins*Server"
-}
