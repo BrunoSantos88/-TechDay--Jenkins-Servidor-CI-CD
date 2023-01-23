@@ -31,6 +31,6 @@
 //}
 
 module "networking" {
-source    = "./-Ecs" 
+source    = "./aws-cluster-ecs" 
 }
 
