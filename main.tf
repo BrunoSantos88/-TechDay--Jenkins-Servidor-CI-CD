@@ -22,4 +22,9 @@
 //}
 
 
+module "projetofinal" {
+source    = "./aws-projetofinal" 
+}
+
+
 
