@@ -45,7 +45,7 @@ stage('GIT CLONE') {
           ///Docker STEPS
     stage('Docker Build') {
       steps {
-        sh 'docker build -t brunosantos88/awssonarqube -Sonarqube/.'
+        sh 'docker build -t brunosantos88/awssonarqube Sonarqube/.'
       }
    }
 
