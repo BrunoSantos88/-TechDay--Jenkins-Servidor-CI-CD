@@ -4,12 +4,13 @@ pipeline {
   tools { 
         ///depentencias 
         maven 'Maven 3.6.3' 
-        terraform 'Terraform 1.3.7' 
+       // terraform 'Terraform 1.3.7' 
     }
         environment {
         //aws
-        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        //AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        //AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        DOCKERHUB_CREDENTIALS = credentials('dockerlogin')
     }
 
 // Stages.
@@ -37,29 +38,52 @@ stage('GIT CLONE') {
                 }
           }
 
+
+
+
+
+          ///Docker STEPS
+    stage('Docker Build') {
+      steps {
+        sh 'docker build -t brunosantos88/awssonarqube -Sonarqube/.'
+      }
+   }
+
+    stage('Docker Login') {
+      steps {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
+    }
+   
+    stage('Docker Push') {
+     steps {
+       sh 'docker push brunosantos88/awssonarqube:latest'
+     }
+   }
+
 //INFRA iS CODE
 
 
-    stage('TF INICIAR') {
-          steps {
-              sh 'terraform init -reconfigure'
+   // stage('TF INICIAR') {
+     //     steps {
+   //           sh 'terraform init -reconfigure'
                 
-           }
-        }
+     //      }
+     //   }
 
-       stage('TF FMT') {
-           steps {
-               sh 'terraform fmt'
+      // stage('TF FMT') {
+       //    steps {
+      //         sh 'terraform fmt'
                 
-            }
-       }
+      //      }
+     //  }
 
-       stage('TF Apply') {
-           steps {
-         sh 'terraform apply -auto-approve'
+      // stage('TF Apply') {
+      //     steps {
+       //  sh 'terraform apply -auto-approve'
            }
-    }
-        }
+ //   }
+  //      }
 
 
 //Email Notification

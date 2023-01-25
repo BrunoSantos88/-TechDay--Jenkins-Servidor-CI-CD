@@ -17,9 +17,9 @@
 //source    = "./aws-eks-jenkins-ec2" 
 ///}
 
-module "cluster-elb-fargate" {
-source    = "./aws-cluster-ecs" 
-}
+//module "cluster-elb-fargate" {
+//source    = "./aws-cluster-ecs" 
+//}
 
 
 
