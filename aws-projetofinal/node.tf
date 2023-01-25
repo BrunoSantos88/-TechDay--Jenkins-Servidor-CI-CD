@@ -72,18 +72,3 @@ resource "aws_eks_node_group" "public-nodes" {
     aws_iam_role_policy_attachment.nodes-AmazonEC2ContainerRegistryReadOnly,
   ]
 }
-
- resource "aws_launch_template" "eks-with-disks" {
-   name = "eks-with-disks"
-
-   key_name = "minhaaws"
-
-   block_device_mappings {
-    device_name = "/dev/xvdb"
-
-    ebs {
-     volume_size = 50
-    volume_type = "gp2"
-    }
-  }
- }
