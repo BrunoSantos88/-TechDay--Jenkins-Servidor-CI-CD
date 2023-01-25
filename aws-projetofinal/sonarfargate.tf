@@ -14,7 +14,7 @@ resource "aws_ecs_task_definition" "sonar" {
       portMappings = [
         {
           containerPort = 9000
-          hostPort      = 900
+          hostPort      = 9000
         }
       ]
     }
