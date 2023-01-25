@@ -1,5 +1,5 @@
-resource "aws_db_instance" "sonarquebdb" {
-  identifier                = "sonarqubedb"
+resource "aws_db_instance" "developer" {
+  identifier                = "developer"
   allocated_storage         = 50
   availability_zone         = "us-east-1a"
   engine                    = "mysql"
@@ -7,9 +7,9 @@ resource "aws_db_instance" "sonarquebdb" {
   instance_class            = var.rds_instance_type
   db_subnet_group_name      = var.subnet-grups
   vpc_security_group_ids    = []
-  name                      = "sonar"
-  username                  = var.login
-  password                  = var.senha
+  name                      = "developer"
+  username                  = "frontent"
+  password                  = "backend"
   skip_final_snapshot       = true
   storage_type              = "gp2"
   port                      = "3306"

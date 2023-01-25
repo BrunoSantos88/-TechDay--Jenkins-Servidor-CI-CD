@@ -74,13 +74,3 @@ variable "subnet-grups" {
   type    = string
   default = "group-subenets-publicas"
 }
-
-variable "login" {
-  type    = string
-  default = "admin"
-}
-
-variable "senha" {
-  type    = string
-  default = "sonarsonar"
-}
