@@ -1,4 +1,6 @@
 resource "aws_lb" "my-personal-web" {
+  provider = aws
+
   name               = "my-personal-web-lb-tf"
   internal           = false
   load_balancer_type = "application"
@@ -11,6 +13,8 @@ resource "aws_lb" "my-personal-web" {
 
 
 resource "aws_lb_target_group" "my-personal-web" {
+  provider = aws
+
   name        = "tf-my-personal-web-lb-tg"
   port        = 80
   protocol    = "HTTP"
@@ -18,6 +22,8 @@ resource "aws_lb_target_group" "my-personal-web" {
   vpc_id      = aws_vpc.networking.id
 
 resource "aws_lb_listener" "my-personal-web" {
+  provider = aws
+
   load_balancer_arn = aws_lb.my-personal-web.arn
   port              = "80"
   protocol          = "HTTP"

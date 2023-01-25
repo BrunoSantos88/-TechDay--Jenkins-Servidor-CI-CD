@@ -1,14 +1,19 @@
 resource "aws_ecs_cluster" "my-personal-web" {
+  provider = aws
   name     = "my-personal-web-api-cluster"
 }
 
 resource "aws_ecs_cluster_capacity_providers" "my-personal-web" {
+  provider = aws
+
   cluster_name = aws_ecs_cluster.my-personal-web.name
 
   capacity_providers = ["FARGATE"]
 }
 
 resource "aws_ecs_task_definition" "my-personal-web" {
+  provider = aws
+
   family                   = "service"
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
@@ -32,6 +37,8 @@ resource "aws_ecs_task_definition" "my-personal-web" {
 }
 
 resource "aws_ecs_service" "my-personal-web" {
+  provider = aws
+
   name            = "my-personal-web"
   cluster         = aws_ecs_cluster.my-personal-web.id
   task_definition = aws_ecs_task_definition.my-personal-web.arn
