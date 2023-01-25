@@ -13,15 +13,15 @@ pipeline {
        // DOCKERHUB_CREDENTIALS = credentials('dockerlogin')
     }
 
-// Stages.
+//Stages.
   stages {   
 
-    stage('Slack Notification(Start)') {
-      steps {
-        slackSend message: 'Pipeline Inciada!. Necessidade de atenção, caso seja em Produção!'
+   // stage('Slack Notification(Start)') {
+    //  steps {
+    //    slackSend message: 'Pipeline Inciada!. Necessidade de atenção, caso seja em Produção!'
 
-}
-}
+//}
+//}
 
   
 stage('GIT CLONE') {
