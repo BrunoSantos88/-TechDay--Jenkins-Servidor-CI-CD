@@ -8,8 +8,8 @@ resource "aws_db_instance" "developer" {
   db_subnet_group_name      = var.subnet-grups
   vpc_security_group_ids    = []
   name                      = "developer"
-  username                  = "frontent"
-  password                  = "backend"
+  username                  = "developer88"
+  password                  = "developer88"
   skip_final_snapshot       = true
   storage_type              = "gp2"
   port                      = "3306"
