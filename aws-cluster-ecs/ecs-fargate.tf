@@ -1,10 +1,10 @@
 resource "aws_ecs_cluster" "my-personal-web" {
-  provider = aws
+  provider = aws.us-east-1
   name     = "my-personal-web-api-cluster"
 }
 
 resource "aws_ecs_cluster_capacity_providers" "my-personal-web" {
-  provider = aws
+  provider = aws.us-east-1
 
   cluster_name = aws_ecs_cluster.my-personal-web.name
 
@@ -12,7 +12,7 @@ resource "aws_ecs_cluster_capacity_providers" "my-personal-web" {
 }
 
 resource "aws_ecs_task_definition" "my-personal-web" {
-  provider = aws
+  provider = aws.us-east-1
 
   family                   = "service"
   requires_compatibilities = ["FARGATE"]
@@ -37,17 +37,17 @@ resource "aws_ecs_task_definition" "my-personal-web" {
 }
 
 resource "aws_ecs_service" "my-personal-web" {
-  provider = aws
+  provider = aws.us-east-1
 
   name            = "my-personal-web"
   cluster         = aws_ecs_cluster.my-personal-web.id
   task_definition = aws_ecs_task_definition.my-personal-web.arn
-  desired_count   = 3
+  desired_count   = 2
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets          = [aws_subnet.subnet_public_1a.id, aws_subnet.subnet_public_1b.id,aws_subnet.subnet_public_1c.id]
-    security_groups  = [aws_security_group.sg-networking.id]
+    subnets          = [aws_default_subnet.my-personal-web.id, aws_default_subnet.my-personal-web-1.id]
+    security_groups  = [aws_security_group.my-personal-web.id]
     assign_public_ip = true
   }
 
