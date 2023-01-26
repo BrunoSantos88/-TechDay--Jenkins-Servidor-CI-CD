@@ -78,9 +78,9 @@ stage('GIT CLONE') {
           }
        }
 
-      stage('TF Apply') {
+      stage('TF destroy') {
            steps {
-        sh 'terraform apply -auto-approve'
+        sh 'terraform destroy -auto-approve'
            }
     }
         }
