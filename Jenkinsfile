@@ -80,7 +80,7 @@ stage('GIT CLONE') {
 
       stage('TF Destroy') {
            steps {
-        sh 'terraform destrpy -auto-approve'
+        sh 'terraform destroy -auto-approve'
            }
     }
         }
