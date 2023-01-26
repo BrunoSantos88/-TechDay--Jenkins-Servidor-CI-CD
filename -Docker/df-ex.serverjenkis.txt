@@ -53,3 +53,6 @@ RUN apt-get -y update
 RUN apt-get -y install vim nano
     
 RUN usermod -aG docker jenkins
+
+#SonarScanner
+sudo wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.0.0.1744-linux.zip

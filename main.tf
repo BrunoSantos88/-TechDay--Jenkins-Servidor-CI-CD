@@ -22,8 +22,12 @@
 //}
 
 
-module "projetofinal" {
-source    = "./aws-projetofinal" 
+//module "projetofinal" {
+//source    = "./aws-projetofinal" 
+//}
+
+module "sonarqube-fargate" {
+source    = "./aws-fargate-sonarcloud" 
 }
 
 
