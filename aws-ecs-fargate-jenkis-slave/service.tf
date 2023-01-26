@@ -1,5 +1,5 @@
-resource "aws_ecs_service" "jkslve" {
-  name              = "jsnkislv"
+resource "aws_ecs_service" "sonarquebe" {
+  name              = "sonar"
   cluster           = aws_ecs_cluster.jenkslvn.id
   task_definition   = aws_ecs_task_definition.jkstask.id
   desired_count     = 1

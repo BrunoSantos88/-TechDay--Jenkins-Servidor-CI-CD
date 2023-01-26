@@ -1,3 +1,4 @@
 #acessoa user
-
 su - Jenkins
+ #alterar senha user
+passwd edward
